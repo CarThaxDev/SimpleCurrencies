@@ -5,11 +5,9 @@ import com.github.carthax08.simplecurrencies.enums.CommandType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.Objects;
 
 public class MainCommand implements CommandExecutor {
 
