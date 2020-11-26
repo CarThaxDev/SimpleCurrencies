@@ -1,0 +1,8 @@
+name: SimpleCurrencies
+version: ${project.version}
+main: com.github.carthax08.simplecurrencies.SimpleCurrencies
+api-version: 1.13
+prefix: [ SimpleCurrencies ]
+authors: [ CarThax08 ]
+description: Adds a few simple currencies to the game. Check the config!
+website: github.com/CarThax08/SimpleCurrencies
