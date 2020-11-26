@@ -2,6 +2,8 @@ package com.github.carthax08.simplecurrencies.events;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +24,7 @@ public class onPlayerJoinEvent implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event){
 
 
-        File f=new File(plugin.getDataFolder(), event.getPlayer().getUniqueId()+".yml");
+        File f=new File(plugin.getDataFolder() + "/players", event.getPlayer().getUniqueId()+".yml");
         if(f.exists()){
             config= YamlConfiguration.loadConfiguration(f);
             Bukkit.getServer().getConsoleSender().sendMessage("Loading player data for " + event.getPlayer().getName());
@@ -31,8 +33,8 @@ public class onPlayerJoinEvent implements Listener {
         else
             try {
 
-                plugin.getDataFolder().createNewFile();
-                config=YamlConfiguration.loadConfiguration(f);
+                f.createNewFile();
+                config = YamlConfiguration.loadConfiguration(f);
                 plugin.playerConfigMap.put(event.getPlayer(), config);
             } catch (IOException e) {
                 e.printStackTrace();
