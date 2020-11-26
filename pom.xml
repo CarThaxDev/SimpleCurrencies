@@ -19,6 +19,7 @@
     <url>github.com/CarThax08/SimpleCurrencies</url>
 
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
