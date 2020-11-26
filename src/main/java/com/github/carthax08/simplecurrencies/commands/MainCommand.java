@@ -2,6 +2,7 @@ package com.github.carthax08.simplecurrencies.commands;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import com.github.carthax08.simplecurrencies.enums.CommandType;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,7 +25,8 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("You do not have the required permissions to use this command!");
                 return true;
             }else{
-                return handleCommand(player, args);
+                Player playerToEdit = Bukkit.getPlayer(args[2]);
+                return handleCommand(playerToEdit, args);
             }
         }else{
             return true;
