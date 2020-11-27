@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -26,14 +27,14 @@ public class MainCommand implements CommandExecutor {
                 return true;
             }else{
                 Player playerToEdit = Bukkit.getPlayer(args[2]);
-                return handleCommand(playerToEdit, args);
+                return handleCommand(playerToEdit, args, player);
             }
         }else{
             return true;
         }
     }
 
-    public boolean handleCommand(Player player, String[] args){
+    public boolean handleCommand(Player playerToEdit, String[] args, Player player){
         if(checkCommandType(args[0]) == CommandType.ADD){
             if(checkArgsLength(args) == 1){
                 player.sendMessage("Please provide a currency, player, and amount");
@@ -45,9 +46,11 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide an amount!");
                 return false;
             }else{
-                YamlConfiguration config = plugin.playerConfigMap.get(player);
+                FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set(args[1], config.getInt(args[1]) + Integer.parseInt(args[3]));
+                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], config.getInt("player." + playerToEdit.getUniqueId().toString() + "." + args[1]) + Integer.parseInt(args[3]));
+                    plugin.saveConfig();
+                    return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
                     return false;
@@ -65,9 +68,11 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide an amount!");
                 return false;
             }else{
-                YamlConfiguration config = plugin.playerConfigMap.get(player);
+                FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set(args[1], Integer.parseInt(args[3]));
+                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], Integer.parseInt(args[3]));
+                    plugin.saveConfig();
+                    return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
                     return false;
@@ -85,9 +90,11 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide an amount!");
                 return false;
             }else{
-                YamlConfiguration config = plugin.playerConfigMap.get(player);
+                FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set(args[1], config.getInt(args[1]) - Integer.parseInt(args[3]));
+                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], config.getInt("player." + playerToEdit.getUniqueId().toString() + "." + args[1]) - Integer.parseInt(args[3]));
+                    plugin.saveConfig();
+                    return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
                     return false;
@@ -102,9 +109,11 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide a player!");
                 return false;
             }else{
-                YamlConfiguration config = plugin.playerConfigMap.get(player);
+                FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set(args[1], 0);
+                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], 0);
+                    plugin.saveConfig();
+                    return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
                     return false;
@@ -116,7 +125,7 @@ public class MainCommand implements CommandExecutor {
 
 
     public boolean checkCurrencyType(String stringToCheck) {
-        return plugin.getConfig().getBoolean("currencies." + stringToCheck + "enabled");
+        return plugin.getConfig().getBoolean("currencies." + stringToCheck + ".enabled");
     }
 
     public CommandType checkCommandType(String stringToCheck){

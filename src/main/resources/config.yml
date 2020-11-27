@@ -1,5 +1,13 @@
+# Simple Currencies
+# Made by CarThax08
+# github.com/carthax08/SimpleCurrencies
+# the currencies tab can be edited to your liking, but a few default values are set.
+
 currencies:
   tickets:
     enabled: true
   money:
     enabled: true
+settings:
+
+players:
