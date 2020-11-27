@@ -11,3 +11,4 @@ commands:
     usage: /simplecurrencies [add, set, remove, clear] [currency] [player] [amount to add, set to, or remove]
     description: The main command for simplecurrencies
     aliases: [/sc, /currencies]
+softdepend: [PlaceholderAPI]
