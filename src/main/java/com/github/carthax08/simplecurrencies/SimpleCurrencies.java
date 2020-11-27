@@ -1,5 +1,6 @@
 package com.github.carthax08.simplecurrencies;
 
+import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpansion;
 import com.github.carthax08.simplecurrencies.commands.MainCommand;
 import com.github.carthax08.simplecurrencies.events.onPlayerLeaveEvent;
 import org.bukkit.ChatColor;
@@ -24,6 +25,9 @@ public final class SimpleCurrencies extends JavaPlugin {
         //Other Registration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+
+        new SimpleCurrenciesExpansion(this);
+
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "The pluign has finished initializing. Enjoy!");
     }
 

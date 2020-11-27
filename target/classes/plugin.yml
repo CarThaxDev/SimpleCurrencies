@@ -1,5 +1,5 @@
 name: SimpleCurrencies
-version: ${project.version}
+version: 1.0
 main: com.github.carthax08.simplecurrencies.SimpleCurrencies
 api-version: 1.16
 prefix: '[SimpleCurrencies]'
@@ -11,4 +11,3 @@ commands:
     usage: /simplecurrencies [add, set, remove, clear] [currency] [player] [amount to add, set to, or remove]
     description: The main command for simplecurrencies
     aliases: [/sc, /currencies]
-softdepend: [PlaceholderAPI]
