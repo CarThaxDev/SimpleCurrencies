@@ -2,6 +2,7 @@ package com.github.carthax08.simplecurrencies.commands;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,9 +30,18 @@ public class PayCommand implements CommandExecutor {
                 if(SimpleCurrencies.getCurrency(args[0], player) < Integer.parseInt(args[2])){
                     player.sendMessage("You do not have enough " + args[0] + " to fulfill the payment!");
                 }else{
-                    @NotNull Player player2 = Objects.requireNonNull(Bukkit.getPlayer(args[1]));
-                    SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
-                    SimpleCurrencies.addCurrency(args[0], player2, Integer.parseInt(args[2]));
+                    for(Player player1: Bukkit.getOnlinePlayers()){
+                        if(player1.getName().equals(args[2])){
+                            SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
+                            SimpleCurrencies.addCurrency(args[0], player1, Integer.parseInt(args[2]));
+                        }
+                    }
+                    for(OfflinePlayer player1 : Bukkit.getOfflinePlayers()){
+                        if(player1.getName().equals(args[2])){
+                            SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
+                            SimpleCurrencies.addCurrency(args[0], player1, Integer.parseInt(args[2]));
+                        }
+                    }
                 }
             }
         }else{

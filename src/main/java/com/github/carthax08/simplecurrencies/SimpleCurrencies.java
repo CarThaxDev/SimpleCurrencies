@@ -6,6 +6,7 @@ import com.github.carthax08.simplecurrencies.commands.MainCommand;
 import com.github.carthax08.simplecurrencies.commands.PayCommand;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -74,7 +75,6 @@ public final class SimpleCurrencies extends JavaPlugin {
     public static void removeCurrency(String currencyToEdit, Player playerToEdit, int amountToRemove){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
         saveConfigFile();
-        saveConfigFile();
     }
     public static void addCurrency(String currencyToEdit, Player playerToEdit, int amountToAdd){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
@@ -89,6 +89,27 @@ public final class SimpleCurrencies extends JavaPlugin {
         saveConfigFile();
     }
     public static int getCurrency(String currencyToGet, Player playerToGetFrom){
+        return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
+    }
+    //API for Offline Players
+    public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, int amountToAdd){
+        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
+        saveConfigFile();
+    }
+    public static void setCurrency(String currencyToEdit, OfflinePlayer playerToEdit, int amountToSet){
+        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, amountToSet);
+        saveConfigFile();
+    }
+    public static void clearCurrency(String currencyToEdit, OfflinePlayer playerToEdit){
+        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, 0);
+        saveConfigFile();
+    }
+    public static void removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, int amountToRemove){
+        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
+        saveConfigFile();
+        saveConfigFile();
+    }
+    public static int getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
         return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
 }

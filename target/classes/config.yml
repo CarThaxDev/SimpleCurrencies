@@ -1,6 +1,6 @@
-# Simple Currencies
+# SimpleCurrencies
 # Made by CarThax08
-# github.com/carthax08/SimpleCurrencies
+# https://www.github.com/carthax08/SimpleCurrencies
 # the currencies tab can be edited to your liking, but a few default values are set.
 # ALL CURRENCY NAMES MUST BE LOWER CASE OR THE PLUGIN WILL NOT RECOGNIZE THEM
 # After you are done editing your config, please set hasBeenEdited to true to get rid of the message on server start.

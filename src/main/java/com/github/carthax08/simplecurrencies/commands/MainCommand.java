@@ -3,6 +3,7 @@ package com.github.carthax08.simplecurrencies.commands;
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import com.github.carthax08.simplecurrencies.enums.CommandType;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,8 +27,17 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("You do not have the required permissions to use this command!");
                 return true;
             }else{
-                Player playerToEdit = Bukkit.getPlayer(args[2]);
-                return handleCommand(playerToEdit, args, player);
+                for(Player player1: Bukkit.getOnlinePlayers()){
+                    if(player1.getName().equals(args[2])){
+                        return handleCommand(player1, args, player);
+                    }
+                }
+                for(OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()){
+                    if(offlinePlayer.getName().equals(args[2]) && offlinePlayer.hasPlayedBefore()){
+                        return handleCommand(offlinePlayer, args, player);
+                    }
+                }
+                return false;
             }
         }else{
             return true;
@@ -48,8 +58,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], config.getInt("player." + playerToEdit.getUniqueId().toString() + "." + args[1]) + Integer.parseInt(args[3]));
-                    plugin.saveConfig();
+                    SimpleCurrencies.addCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -71,8 +80,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], Integer.parseInt(args[3]));
-                    plugin.saveConfig();
+                    SimpleCurrencies.setCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -94,8 +102,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], config.getInt("player." + playerToEdit.getUniqueId().toString() + "." + args[1]) - Integer.parseInt(args[3]));
-                    plugin.saveConfig();
+                    SimpleCurrencies.removeCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -114,8 +121,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], 0);
-                    player.sendMessage("Success!");
+                    SimpleCurrencies.clearCurrency(args[1], playerToEdit);
                     plugin.saveConfig();
                     return true;
                 }else{
@@ -155,5 +161,97 @@ public class MainCommand implements CommandExecutor {
     }
     public int checkArgsLength(String[] args){
         return args.length;
+    }
+
+    public boolean handleCommand(OfflinePlayer playerToEdit, String[] args, Player player){
+        if(checkCommandType(args[0]) == CommandType.ADD){
+            if(checkArgsLength(args) == 1){
+                player.sendMessage("Please provide a currency, player, and amount");
+                return false;
+            }else if(checkArgsLength(args) == 2){
+                player.sendMessage("Please provide a player and amount!");
+                return false;
+            }else if(checkArgsLength(args) == 3){
+                player.sendMessage("Please provide an amount!");
+                return false;
+            }else{
+                FileConfiguration config = plugin.getConfig();
+                if(checkCurrencyType(args[1])){
+                    SimpleCurrencies.addCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    player.sendMessage("Success!");
+                    return true;
+                }else{
+                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
+                    return false;
+                }
+            }
+        }
+        if(checkCommandType(args[0]) == CommandType.SET){
+            if(checkArgsLength(args) == 1){
+                player.sendMessage("Please provide a currency, player, and amount");
+                return false;
+            }else if(checkArgsLength(args) == 2){
+                player.sendMessage("Please provide a player and amount!");
+                return false;
+            }else if(checkArgsLength(args) == 3){
+                player.sendMessage("Please provide an amount!");
+                return false;
+            }else{
+                FileConfiguration config = plugin.getConfig();
+                if(checkCurrencyType(args[1])){
+                    SimpleCurrencies.setCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    player.sendMessage("Success!");
+                    return true;
+                }else{
+                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
+                    return false;
+                }
+            }
+        }
+        if(checkCommandType(args[0]) == CommandType.REMOVE){
+            if(checkArgsLength(args) == 1){
+                player.sendMessage("Please provide a currency, player, and amount");
+                return false;
+            }else if(checkArgsLength(args) == 2){
+                player.sendMessage("Please provide a player and amount!");
+                return false;
+            }else if(checkArgsLength(args) == 3){
+                player.sendMessage("Please provide an amount!");
+                return false;
+            }else{
+                FileConfiguration config = plugin.getConfig();
+                if(checkCurrencyType(args[1])){
+                    SimpleCurrencies.removeCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    player.sendMessage("Success!");
+                    return true;
+                }else{
+                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
+                    return false;
+                }
+            }
+        }
+        if(checkCommandType(args[0]) == CommandType.CLEAR){
+            if(checkArgsLength(args) == 1){
+                player.sendMessage("Please provide a currency and a player");
+                return false;
+            }else if(checkArgsLength(args) == 2){
+                player.sendMessage("Please provide a player!");
+                return false;
+            }else{
+                FileConfiguration config = plugin.getConfig();
+                if(checkCurrencyType(args[1])){
+                    SimpleCurrencies.clearCurrency(args[1], playerToEdit);
+                    plugin.saveConfig();
+                    return true;
+                }else{
+                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
+                    return false;
+                }
+            }
+        }
+        if(checkCommandType(args[0]) == CommandType.RELOAD){
+            plugin.reloadConfig();
+        }
+        return false;
     }
 }

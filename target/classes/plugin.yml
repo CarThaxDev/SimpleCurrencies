@@ -10,9 +10,13 @@ commands:
   simplecurrencies:
     usage: /simplecurrencies [add, set, remove, clear, reload] [currency] [player] [amount to add, set to, or remove]
     description: The main command for simplecurrencies
-    aliases: [/sc, /currencies]
+    aliases: [sc, currencies]
   getcurrency:
     usage: /getcurrency [currency] [player]
     description: Gets a player's amount of a certain currency
-    aliases: /gc
+    aliases: [get, gc, getc, gcurrency]
+  sendcurrency:
+    usage: /sendcurrency [currency] [player] [amount[
+    description: Send a certain amount of currency to another player provided you have enough.
+    aliases: [sc, send, scurrency, sendc, paycurrency]
 softdepend: [PlaceholderAPI]
