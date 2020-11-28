@@ -50,6 +50,7 @@ public class MainCommand implements CommandExecutor {
                 if(checkCurrencyType(args[1])){
                     config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], config.getInt("player." + playerToEdit.getUniqueId().toString() + "." + args[1]) + Integer.parseInt(args[3]));
                     plugin.saveConfig();
+                    player.sendMessage("Success!");
                     return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
@@ -72,6 +73,7 @@ public class MainCommand implements CommandExecutor {
                 if(checkCurrencyType(args[1])){
                     config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], Integer.parseInt(args[3]));
                     plugin.saveConfig();
+                    player.sendMessage("Success!");
                     return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
@@ -94,6 +96,7 @@ public class MainCommand implements CommandExecutor {
                 if(checkCurrencyType(args[1])){
                     config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], config.getInt("player." + playerToEdit.getUniqueId().toString() + "." + args[1]) - Integer.parseInt(args[3]));
                     plugin.saveConfig();
+                    player.sendMessage("Success!");
                     return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
@@ -112,6 +115,7 @@ public class MainCommand implements CommandExecutor {
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
                     config.set("players." +  playerToEdit.getUniqueId().toString() + "." + args[1], 0);
+                    player.sendMessage("Success!");
                     plugin.saveConfig();
                     return true;
                 }else{
@@ -128,7 +132,7 @@ public class MainCommand implements CommandExecutor {
 
 
     public boolean checkCurrencyType(String stringToCheck) {
-        return plugin.getConfig().getBoolean("currencies." + stringToCheck + ".enabled");
+        return plugin.getConfig().getBoolean("currencies." + stringToCheck.toLowerCase() + ".enabled");
     }
 
     public CommandType checkCommandType(String stringToCheck){
