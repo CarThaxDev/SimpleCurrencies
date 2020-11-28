@@ -26,18 +26,23 @@ public class MainCommand implements CommandExecutor {
             if(!player.hasPermission("simplecurrencies.admin")){
                 player.sendMessage("You do not have the required permissions to use this command!");
                 return true;
-            }else{
-                for(Player player1: Bukkit.getOnlinePlayers()){
-                    if(player1.getName().equals(args[2])){
-                        return handleCommand(player1, args, player);
+            }else {
+                if (args.length == 0) {
+                    player.sendMessage("You must provide an operation, currency, player, and amount!");
+                    return false;
+                } else {
+                    for (Player player1 : Bukkit.getOnlinePlayers()) {
+                        if (player1.getName().equals(args[2])) {
+                            return handleCommand(player1, args, player);
+                        }
                     }
-                }
-                for(OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()){
-                    if(offlinePlayer.getName().equals(args[2]) && offlinePlayer.hasPlayedBefore()){
-                        return handleCommand(offlinePlayer, args, player);
+                    for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
+                        if (offlinePlayer.getName().equals(args[2]) && offlinePlayer.hasPlayedBefore()) {
+                            return handleCommand(offlinePlayer, args, player);
+                        }
                     }
+                    return false;
                 }
-                return false;
             }
         }else{
             return true;
@@ -165,7 +170,8 @@ public class MainCommand implements CommandExecutor {
 
     public boolean handleCommand(OfflinePlayer playerToEdit, String[] args, Player player){
         if(checkCommandType(args[0]) == CommandType.ADD){
-            if(checkArgsLength(args) == 1){
+            if(checkArgsLength(args) == 0){
+            }else if(checkArgsLength(args) == 1){
                 player.sendMessage("Please provide a currency, player, and amount");
                 return false;
             }else if(checkArgsLength(args) == 2){
