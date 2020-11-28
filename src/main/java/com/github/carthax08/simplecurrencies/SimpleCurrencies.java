@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.print.attribute.standard.Severity;
 import java.util.HashMap;
 
 public final class SimpleCurrencies extends JavaPlugin {
@@ -28,6 +29,9 @@ public final class SimpleCurrencies extends JavaPlugin {
         //Other Registration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        if(!getConfig().getBoolean("settings.hasBeenEdited")){
+            getServer().getLogger().warning("[SimpleCurrencies] You are still using the default config! Please edit it.");
+        }
 
         instance = this;
 
