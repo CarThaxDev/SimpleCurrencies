@@ -24,6 +24,7 @@ public class GetCommand implements CommandExecutor {
          }else{
              Player player2 = Bukkit.getPlayer(args[1]);
              sender.sendMessage(String.valueOf(plugin.getConfig().getInt("players." + player2.getUniqueId().toString() + "." + args[0])));
+             return true;
          }
     }else{
             if(args.length <= 1){
@@ -32,8 +33,8 @@ public class GetCommand implements CommandExecutor {
             }else{
                 Player player = Bukkit.getPlayer(args[1]);
                 sender.sendMessage(String.valueOf(plugin.getConfig().getInt("players." + player.getUniqueId().toString() + "." + args[0])));
+                return true;
             }
         }
-        return false;
     }
 }
