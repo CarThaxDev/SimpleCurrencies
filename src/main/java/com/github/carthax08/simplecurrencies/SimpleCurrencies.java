@@ -3,6 +3,7 @@ package com.github.carthax08.simplecurrencies;
 import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpansion;
 import com.github.carthax08.simplecurrencies.commands.GetCommand;
 import com.github.carthax08.simplecurrencies.commands.MainCommand;
+import com.github.carthax08.simplecurrencies.commands.PayCommand;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,33 +15,39 @@ import java.util.HashMap;
 
 public final class SimpleCurrencies extends JavaPlugin {
 
-    public HashMap<Player, FileConfiguration> playerConfigMap = new HashMap<>();
     private static SimpleCurrencies instance;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "The plugin is initializing... Please wait.");
+        getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The plugin is initializing... Please wait.");
+
         //Command Registration
         getCommand("simplecurrencies").setExecutor(new MainCommand(this));
         getCommand("getcurrency").setExecutor(new GetCommand(this));
+        getCommand("sendcurrency").setExecutor(new PayCommand());
+
         //Event Registration
         getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
-        //Other Registration
+
+        //Config Registration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         if(!getConfig().getBoolean("settings.hasBeenEdited")){
             getServer().getLogger().warning("[SimpleCurrencies] You are still using the default config! Please edit it.");
         }
 
+        //API Registration
         instance = this;
+
+        //PlaceholderAPI Registration
         if(getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new SimpleCurrenciesExpansion(this);
         }else{
-            getServer().getLogger().info("[SimpleCurrencies] PlaceholderAPI is not installed! it is reccomended you install it!");
+            getServer().getLogger().info("[SimpleCurrencies] PlaceholderAPI is not installed! it is recommended you install it!");
         }
-
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "The pluign has finished initializing. Enjoy!");
+        //Final Init message
+        getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The pluign has finished initializing. Enjoy!");
     }
 
 
@@ -49,8 +56,14 @@ public final class SimpleCurrencies extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        getServer().getLogger().info("[SimpleCurrencies] The plugin is shutting down, please wait...");
+        getServer().getLogger().info("[SimpleCurrencies] Saving Config...");
+        saveConfigFile();
+        getServer().getLogger().info("[SimpleCurrencies] Config Saved...");
+        getServer().getLogger().info("[SimpleCurrencies] The plugin has finished shutting down.");
     }
 
+    //Public API
     public static FileConfiguration getConfigFile(){
         return instance.getConfig();
     }
@@ -75,7 +88,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, 0);
         saveConfigFile();
     }
-    public static void getCurrency(String currencyToGet, Player playerToGetFrom){
-        instance.getConfig().get("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
+    public static int getCurrency(String currencyToGet, Player playerToGetFrom){
+        return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
 }
