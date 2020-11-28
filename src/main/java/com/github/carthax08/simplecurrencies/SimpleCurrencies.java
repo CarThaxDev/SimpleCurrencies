@@ -34,8 +34,11 @@ public final class SimpleCurrencies extends JavaPlugin {
         }
 
         instance = this;
-
-        new SimpleCurrenciesExpansion(this);
+        if(getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new SimpleCurrenciesExpansion(this);
+        }else{
+            getServer().getLogger().info("[SimpleCurrencies] PlaceholderAPI is not installed! it is reccomended you install it!");
+        }
 
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "The pluign has finished initializing. Enjoy!");
     }
