@@ -5,5 +5,6 @@ public enum CommandType {
     SET,
     REMOVE,
     CLEAR,
+    RELOAD,
     UNKNOWN
 }

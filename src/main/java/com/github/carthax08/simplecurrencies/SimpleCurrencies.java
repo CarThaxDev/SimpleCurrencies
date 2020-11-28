@@ -1,6 +1,7 @@
 package com.github.carthax08.simplecurrencies;
 
 import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpansion;
+import com.github.carthax08.simplecurrencies.commands.GetCommand;
 import com.github.carthax08.simplecurrencies.commands.MainCommand;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.ChatColor;
@@ -21,6 +22,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "The plugin is initializing... Please wait.");
         //Command Registration
         getCommand("simplecurrencies").setExecutor(new MainCommand(this));
+        getCommand("getcurrency").setExecutor(new GetCommand(this));
         //Event Registration
         getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
         //Other Registration
@@ -51,14 +53,22 @@ public final class SimpleCurrencies extends JavaPlugin {
 
     public static void removeCurrency(String currencyToEdit, Player playerToEdit, int amountToRemove){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
+        saveConfigFile();
+        saveConfigFile();
     }
     public static void addCurrency(String currencyToEdit, Player playerToEdit, int amountToAdd){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
+        saveConfigFile();
     }
     public static void setCurrency(String currencyToEdit, Player playerToEdit, int amountToSet){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, amountToSet);
+        saveConfigFile();
     }
     public static void clearCurrency(String currencyToEdit, Player playerToEdit){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, 0);
+        saveConfigFile();
+    }
+    public static void getCurrency(String currencyToGet, Player playerToGetFrom){
+        instance.getConfig().get("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
 }

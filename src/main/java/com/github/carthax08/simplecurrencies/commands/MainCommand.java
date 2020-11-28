@@ -120,6 +120,9 @@ public class MainCommand implements CommandExecutor {
                 }
             }
         }
+        if(checkCommandType(args[0]) == CommandType.RELOAD){
+            plugin.reloadConfig();
+        }
         return false;
     }
 
@@ -140,6 +143,9 @@ public class MainCommand implements CommandExecutor {
         }
         if(stringToCheck.equalsIgnoreCase("clear")){
             return CommandType.CLEAR;
+        }
+        if(stringToCheck.equalsIgnoreCase("reload")){
+            return CommandType.RELOAD;
         }
         return CommandType.UNKNOWN;
     }

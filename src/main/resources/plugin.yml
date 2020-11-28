@@ -8,7 +8,11 @@ description: Adds a few simple currencies to the game. Check the config!
 website: github.com/CarThax08/SimpleCurrencies
 commands:
   simplecurrencies:
-    usage: /simplecurrencies [add, set, remove, clear] [currency] [player] [amount to add, set to, or remove]
+    usage: /simplecurrencies [add, set, remove, clear, reload] [currency] [player] [amount to add, set to, or remove]
     description: The main command for simplecurrencies
     aliases: [/sc, /currencies]
-softdepend: [PlaceholderAPI]
+  getcurrency:
+    usage: /getcurrency [currency] [player]
+    description: Gets a player's amount of a certain currency
+    aliases: /gc
+depend: [PlaceholderAPI]
