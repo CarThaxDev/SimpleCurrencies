@@ -18,4 +18,7 @@ commands:
     usage: /sendcurrency [currency] [player] [amount[
     description: Send a certain amount of currency to another player provided you have enough.
     aliases: [sc, send, scurrency, sendc, paycurrency]
+  sell:
+    usage: /sell
+    description: Sells all the items that can be sold from your inventory to the server.
 softdepend: [PlaceholderAPI]

@@ -4,6 +4,7 @@ import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpan
 import com.github.carthax08.simplecurrencies.commands.GetCommand;
 import com.github.carthax08.simplecurrencies.commands.MainCommand;
 import com.github.carthax08.simplecurrencies.commands.PayCommand;
+import com.github.carthax08.simplecurrencies.commands.SellCommand;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.ChatColor;
@@ -26,6 +27,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getCommand("simplecurrencies").setExecutor(new MainCommand(this));
         getCommand("getcurrency").setExecutor(new GetCommand(this));
         getCommand("sendcurrency").setExecutor(new PayCommand());
+        getCommand("sell").setExecutor(new SellCommand());
 
         //Event Registration
         getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
@@ -42,7 +44,7 @@ public final class SimpleCurrencies extends JavaPlugin {
             getServer().getLogger().warning("[SimpleCurrencies] You are still using the default config! Please edit it.");
         }
 
-        //API Registration
+        //API Setup
         instance = this;
 
         //PlaceholderAPI Registration
