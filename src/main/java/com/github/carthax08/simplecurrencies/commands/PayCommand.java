@@ -31,15 +31,17 @@ public class PayCommand implements CommandExecutor {
                     player.sendMessage("You do not have enough " + args[0] + " to fulfill the payment!");
                 }else{
                     for(Player player1: Bukkit.getOnlinePlayers()){
-                        if(player1.getName().equals(args[2])){
+                        if(player1.getName().equals(args[1])){
                             SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
                             SimpleCurrencies.addCurrency(args[0], player1, Integer.parseInt(args[2]));
+                            return true;
                         }
                     }
                     for(OfflinePlayer player1 : Bukkit.getOfflinePlayers()){
-                        if(player1.getName().equals(args[2])){
+                        if(player1.getName().equals(args[1])){
                             SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
                             SimpleCurrencies.addCurrency(args[0], player1, Integer.parseInt(args[2]));
+                            return true;
                         }
                     }
                 }
