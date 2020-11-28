@@ -23,7 +23,7 @@ public class GetCommand implements CommandExecutor {
              return false;
          }else{
              Player player2 = Bukkit.getPlayer(args[1]);
-             sender.sendMessage(String.valueOf(plugin.getConfig().getInt("players." + player2.getUniqueId().toString() + "." + args[0])));
+             sender.sendMessage(args[1] + " has " + plugin.getConfig().getInt("players." + player.getUniqueId().toString() + "." + args[0]) + " " + args[0]);
              return true;
          }
     }else{
