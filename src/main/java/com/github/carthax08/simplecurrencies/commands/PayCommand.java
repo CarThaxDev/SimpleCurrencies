@@ -2,6 +2,7 @@ package com.github.carthax08.simplecurrencies.commands;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,14 +35,21 @@ public class PayCommand implements CommandExecutor {
                         if(player1.getName().equals(args[1])){
                             SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
                             SimpleCurrencies.addCurrency(args[0], player1, Integer.parseInt(args[2]));
+                            player.sendMessage(ChatColor.GREEN + "You successfully sent " + args[2] + " " + args[0] + " to " + player1.getName());
+                            player1.sendMessage(ChatColor.GREEN + player.getName() + " has sent you " + args[2] + " " + args[0] + ".");
                             return true;
                         }
                     }
                     for(OfflinePlayer player1 : Bukkit.getOfflinePlayers()){
-                        if(player1.getName().equals(args[1])){
-                            SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
-                            SimpleCurrencies.addCurrency(args[0], player1, Integer.parseInt(args[2]));
-                            return true;
+                        if(player1.getName().equals(args[1])) {
+                            if (player1.hasPlayedBefore()) {
+                                SimpleCurrencies.removeCurrency(args[0], player, Integer.parseInt(args[2]));
+                                SimpleCurrencies.addCurrency(args[0], player1, Integer.parseInt(args[2]));
+                                player.sendMessage(ChatColor.GREEN + "You successfully sent " + args[2] + " " + args[0] + " to " + player1.getName() + ".");
+                                return true;
+                            }else{
+                                player.sendMessage("That player does not exist!");
+                            }
                         }
                     }
                 }
