@@ -64,7 +64,7 @@ public class SimpleCurrenciesExpansion extends PlaceholderExpansion {
      */
     @Override
     public String getIdentifier(){
-        return "SimpleCurrencies";
+        return "simplecurrencies";
     }
 
     /**

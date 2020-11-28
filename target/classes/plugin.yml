@@ -15,4 +15,4 @@ commands:
     usage: /getcurrency [currency] [player]
     description: Gets a player's amount of a certain currency
     aliases: /gc
-depend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI]
