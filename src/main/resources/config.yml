@@ -4,6 +4,7 @@
 # the currencies tab can be edited to your liking, but a few default values are set.
 # ALL CURRENCY NAMES MUST BE LOWER CASE OR THE PLUGIN WILL NOT RECOGNIZE THEM
 # After you are done editing your config, please set hasBeenEdited to true to get rid of the message on server start.
+# The values tab is for an up and coming update to add a basic selling system to the plugin, but anything more complicated will require another plugin.
 
 currencies:
   tickets:
@@ -13,3 +14,17 @@ currencies:
 settings:
   hasBeenEdited: false
 players:
+
+values:
+  coal:
+    value: 0.50
+    currency: money
+  iron_ore:
+    value: 1.50
+    currency: money
+  gold_ore:
+    value: 5.00
+    currency: money
+  lapis_lazuli:
+    value: 2.50
+    currency: money

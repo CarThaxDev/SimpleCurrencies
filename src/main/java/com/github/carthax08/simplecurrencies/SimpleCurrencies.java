@@ -112,4 +112,10 @@ public final class SimpleCurrencies extends JavaPlugin {
     public static int getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
         return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
+    public static int getSellingPrice(String nameToCheck){
+        return instance.getConfig().getInt("value." + nameToCheck + ".value");
+    }
+    public static String getSellingCurrency(String nameToCheck){
+        return instance.getConfig().getString("values." + nameToCheck + ".currency");
+    }
 }
