@@ -4,6 +4,7 @@ import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpan
 import com.github.carthax08.simplecurrencies.commands.GetCommand;
 import com.github.carthax08.simplecurrencies.commands.MainCommand;
 import com.github.carthax08.simplecurrencies.commands.PayCommand;
+import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -11,12 +12,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.print.attribute.standard.Severity;
-import java.util.HashMap;
-
 public final class SimpleCurrencies extends JavaPlugin {
 
     private static SimpleCurrencies instance;
+    private static FileConfiguration sellConfig;
 
     @Override
     public void onEnable() {
@@ -34,6 +33,11 @@ public final class SimpleCurrencies extends JavaPlugin {
         //Config Registration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+
+        //Shop Config Registration
+        PricesConfig.setupConfig();
+        sellConfig = PricesConfig.getConfig();
+
         if(!getConfig().getBoolean("settings.hasBeenEdited")){
             getServer().getLogger().warning("[SimpleCurrencies] You are still using the default config! Please edit it.");
         }
@@ -64,7 +68,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getServer().getLogger().info("[SimpleCurrencies] The plugin has finished shutting down.");
     }
 
-    //Public API
+    //Basic Config-Based API API
     public static FileConfiguration getConfigFile(){
         return instance.getConfig();
     }
@@ -72,6 +76,9 @@ public final class SimpleCurrencies extends JavaPlugin {
         instance.saveConfig();
     }
 
+
+
+    //API for Online Players
     public static void removeCurrency(String currencyToEdit, Player playerToEdit, int amountToRemove){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
         saveConfigFile();
@@ -91,6 +98,9 @@ public final class SimpleCurrencies extends JavaPlugin {
     public static int getCurrency(String currencyToGet, Player playerToGetFrom){
         return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
+
+
+
     //API for Offline Players
     public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, int amountToAdd){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
@@ -113,9 +123,9 @@ public final class SimpleCurrencies extends JavaPlugin {
         return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
     public static int getSellingPrice(String nameToCheck){
-        return instance.getConfig().getInt("value." + nameToCheck + ".value");
+        return sellConfig.getInt("prices." + nameToCheck + ".value");
     }
     public static String getSellingCurrency(String nameToCheck){
-        return instance.getConfig().getString("values." + nameToCheck + ".currency");
+        return sellConfig.getString("prices." + nameToCheck + ".currency");
     }
 }
