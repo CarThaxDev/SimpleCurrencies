@@ -27,6 +27,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getCommand("simplecurrencies").setExecutor(new MainCommand(this));
         getCommand("getcurrency").setExecutor(new GetCommand(this));
         getCommand("sendcurrency").setExecutor(new PayCommand());
+        getCommand("balance").setExecutor(new PayCommand());
         //getCommand("sell").setExecutor(new SellCommand());
 
         //Event Registration

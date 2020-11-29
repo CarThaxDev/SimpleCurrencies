@@ -1,6 +1,7 @@
 com/github/carthax08/simplecurrencies/commands/GetCommand.class
 com/github/carthax08/simplecurrencies/enums/CommandType.class
 com/github/carthax08/simplecurrencies/PapiExpansion/SimpleCurrenciesExpansion.class
+com/github/carthax08/simplecurrencies/commands/BalanceCommand.class
 com/github/carthax08/simplecurrencies/commands/PayCommand.class
 com/github/carthax08/simplecurrencies/SimpleCurrencies.class
 com/github/carthax08/simplecurrencies/data/PricesConfig.class
