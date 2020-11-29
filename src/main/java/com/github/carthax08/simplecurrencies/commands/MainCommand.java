@@ -1,6 +1,7 @@
 package com.github.carthax08.simplecurrencies.commands;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
+import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.enums.CommandType;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -257,6 +258,7 @@ public class MainCommand implements CommandExecutor {
         }
         if(checkCommandType(args[0]) == CommandType.RELOAD){
             plugin.reloadConfig();
+            PricesConfig.reloadConfig();
         }
         return false;
     }

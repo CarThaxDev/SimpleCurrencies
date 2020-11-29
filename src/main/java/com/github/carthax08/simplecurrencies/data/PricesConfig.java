@@ -12,6 +12,7 @@ import java.util.List;
 public class PricesConfig {
     private static File file;
     private static FileConfiguration customConfig;
+    private static List<String> list = new ArrayList<String>();
 
     public static void setupConfig(){
         file = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), "prices.yml");
@@ -23,11 +24,14 @@ public class PricesConfig {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else{
+            for(int i = 0; i < customConfig.getList("items").size(); i++){
+                list.add(customConfig.getList("items").get(i).toString());
+            }
         }
     }
 
     private static void addDefaultValues() {
-        List<String> list = new ArrayList<String>();
 
         list.add("coal");
         list.add("iron_ore");
