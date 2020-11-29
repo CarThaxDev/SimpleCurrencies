@@ -8,8 +8,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import static com.github.carthax08.simplecurrencies.api.Config.saveConfigFile;
 
 public class Currencies {
-    private static SimpleCurrencies instance = SimpleCurrencies.getInstance();
-    private static FileConfiguration sellConfig = PricesConfig.getConfig();
+    private static final SimpleCurrencies instance = SimpleCurrencies.getInstance();
+    private static final FileConfiguration sellConfig = PricesConfig.getConfig();
 
     public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToAdd){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getDouble("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);

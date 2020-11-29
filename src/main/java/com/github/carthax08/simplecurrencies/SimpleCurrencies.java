@@ -10,16 +10,19 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Random;
+
 public final class SimpleCurrencies extends JavaPlugin {
 
     private static SimpleCurrencies instance;
     private static FileConfiguration sellConfig;
+    private Random rand;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+        rand = new Random();
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The plugin is initializing... Please wait.");
-
         //Command Registration
         getCommand("simplecurrencies").setExecutor(new MainCommand(this));
         getCommand("getcurrency").setExecutor(new GetCommand(this));
@@ -50,6 +53,11 @@ public final class SimpleCurrencies extends JavaPlugin {
             new SimpleCurrenciesExpansion(this);
         }else{
             getServer().getLogger().info("[SimpleCurrencies] PlaceholderAPI is not installed! it is recommended you install it!");
+        }
+        //Rating Message
+        int i = rand.nextInt(100);
+        if(i > 10 && i < 15){
+            getServer().getConsoleSender().sendMessage("[SimpleCurrencies] " + ChatColor.YELLOW + "If you haven't already, please leave a rating on Spigot.");
         }
         //Final Init message
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The pluign has finished initializing. Enjoy!");
