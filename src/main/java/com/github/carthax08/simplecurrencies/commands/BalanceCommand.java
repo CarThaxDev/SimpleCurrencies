@@ -18,7 +18,7 @@ public class BalanceCommand implements CommandExecutor {
                 return true;
             }else{
                 if(SimpleCurrencies.checkCurrency(args[0].toLowerCase())){
-                    player.sendMessage(ChatColor.GREEN + args[0].toLowerCase() + ":" + ChatColor.RESET + SimpleCurrencies.getCurrency(args[0].toLowerCase(), player));
+                    player.sendMessage(ChatColor.GREEN + args[0].toLowerCase() + ": " + ChatColor.RESET + SimpleCurrencies.getCurrency(args[0].toLowerCase(), player));
                     return true;
                 }else{
                     player.sendMessage("Please provide a currency that exists!");

@@ -23,7 +23,7 @@ commands:
     aliases: [get, gc, getc, gcurrency]
     permission: simplecurrencies.getotherbalances
   sendcurrency:
-    usage: /sendcurrency [currency] [player] [amount[
+    usage: /sendcurrency [currency] [player] [amount}
     description: Send a certain amount of currency to another player provided you have enough.
     aliases: [sc, send, scurrency, sendc, paycurrency]
   balance:
