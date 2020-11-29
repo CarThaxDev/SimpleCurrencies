@@ -24,7 +24,7 @@ public class SellCommand implements CommandExecutor {
             Inventory inventory = player.getInventory();
             ItemStack[] items = inventory.getContents();
             FileConfiguration config = PricesConfig.getConfig();
-            List list = config.getList("items");
+            List<?> list = config.getList("items");
             int itemsSold = 0;
             for(int i = 1; i < items.length; i++){
                 assert list != null;

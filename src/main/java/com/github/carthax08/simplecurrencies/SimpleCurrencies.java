@@ -27,7 +27,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getCommand("simplecurrencies").setExecutor(new MainCommand(this));
         getCommand("getcurrency").setExecutor(new GetCommand(this));
         getCommand("sendcurrency").setExecutor(new PayCommand());
-        getCommand("sell").setExecutor(new SellCommand());
+        //getCommand("sell").setExecutor(new SellCommand());
 
         //Event Registration
         getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
@@ -37,8 +37,8 @@ public final class SimpleCurrencies extends JavaPlugin {
         saveDefaultConfig();
 
         //Shop Config Registration
-        PricesConfig.setupConfig();
-        sellConfig = PricesConfig.getConfig();
+        //PricesConfig.setupConfig();
+        //sellConfig = PricesConfig.getConfig();
 
         if(!getConfig().getBoolean("settings.hasBeenEdited")){
             getServer().getLogger().warning("[SimpleCurrencies] You are still using the default config! Please edit it.");
