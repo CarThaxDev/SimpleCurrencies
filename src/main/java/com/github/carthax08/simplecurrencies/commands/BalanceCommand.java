@@ -8,6 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import static com.github.carthax08.simplecurrencies.api.Config.*;
+import static com.github.carthax08.simplecurrencies.api.Currencies.*;
+
 public class BalanceCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -17,8 +20,8 @@ public class BalanceCommand implements CommandExecutor {
                 player.sendMessage("Please provide a currency!");
                 return true;
             }else{
-                if(SimpleCurrencies.checkCurrency(args[0].toLowerCase())){
-                    player.sendMessage(ChatColor.GREEN + args[0].toLowerCase() + ": " + ChatColor.RESET + SimpleCurrencies.getCurrency(args[0].toLowerCase(), player));
+                if(checkCurrency(args[0].toLowerCase())){
+                    player.sendMessage(ChatColor.GREEN + args[0].toLowerCase() + ": " + ChatColor.RESET + getCurrency(args[0].toLowerCase(), player));
                     return true;
                 }else{
                     player.sendMessage("Please provide a currency that exists!");

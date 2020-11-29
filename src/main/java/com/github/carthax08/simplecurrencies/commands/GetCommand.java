@@ -7,6 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static com.github.carthax08.simplecurrencies.api.Config.*;
+import static com.github.carthax08.simplecurrencies.api.Currencies.*;
+
 public class GetCommand implements CommandExecutor {
 
     SimpleCurrencies plugin;

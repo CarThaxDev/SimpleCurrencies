@@ -14,6 +14,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static com.github.carthax08.simplecurrencies.api.Config.*;
+import static com.github.carthax08.simplecurrencies.api.Currencies.*;
+
 public class SellCommand implements CommandExecutor {
 
     @Override
@@ -32,7 +35,7 @@ public class SellCommand implements CommandExecutor {
                     if (list.contains(items[i].getType().toString())) {
                         inventory.remove(items[i]);
                         String stringToCheck = items[i].getType().toString();
-                        SimpleCurrencies.addCurrency(SimpleCurrencies.getSellingCurrency(stringToCheck.toLowerCase()), player, SimpleCurrencies.getSellingPrice(stringToCheck) * items[i].getAmount());
+                        addCurrency(getSellingCurrency(stringToCheck.toLowerCase()), player, getSellingPrice(stringToCheck) * items[i].getAmount());
                         itemsSold += items[i].getAmount();
                     }
                 }catch(Exception e){

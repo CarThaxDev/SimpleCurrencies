@@ -9,9 +9,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import static com.github.carthax08.simplecurrencies.api.Config.*;
+import static com.github.carthax08.simplecurrencies.api.Currencies.*;
 
 public class MainCommand implements CommandExecutor {
 
@@ -91,7 +92,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.addCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
+                    addCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -113,7 +114,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.setCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
+                    setCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -135,7 +136,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.removeCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
+                    removeCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -154,7 +155,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.clearCurrency(args[1], playerToEdit);
+                    clearCurrency(args[1], playerToEdit);
                     plugin.saveConfig();
                     return true;
                 }else{
