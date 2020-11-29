@@ -21,6 +21,7 @@ commands:
     usage: /getcurrency [currency] [player]
     description: Gets a player's amount of a certain currency
     aliases: [get, gc, getc, gcurrency]
+    permission: simplecurrencies.getotherbalances
   sendcurrency:
     usage: /sendcurrency [currency] [player] [amount[
     description: Send a certain amount of currency to another player provided you have enough.

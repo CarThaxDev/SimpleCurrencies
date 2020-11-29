@@ -83,33 +83,11 @@ public final class SimpleCurrencies extends JavaPlugin {
     }
 
 
-
-    //API for Online Players
-    public static void removeCurrency(String currencyToEdit, Player playerToEdit, Double amountToRemove){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
-        saveConfigFile();
-    }
-    public static void addCurrency(String currencyToEdit, Player playerToEdit, Double amountToAdd){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
-        saveConfigFile();
-    }
-    public static void setCurrency(String currencyToEdit, Player playerToEdit, Double amountToSet){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, amountToSet);
-        saveConfigFile();
-    }
-    public static void clearCurrency(String currencyToEdit, Player playerToEdit){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, 0);
-        saveConfigFile();
-    }
-    public static Double getCurrency(String currencyToGet, Player playerToGetFrom){
-        return instance.getConfig().getDouble("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
-    }
-
     public static SimpleCurrencies getInstance(){
         return instance;
     }
 
-    //API for Offline Players
+    //API for Players and OfflinePlayers
     public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToAdd){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getDouble("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
         saveConfigFile();
