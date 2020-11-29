@@ -28,11 +28,15 @@ public class SellCommand implements CommandExecutor {
             int itemsSold = 0;
             for(int i = 1; i < items.length; i++){
                 assert list != null;
-                if(list.contains(items[i].getType().toString())){
-                    inventory.remove(items[i]);
-                    String stringToCheck = items[i].getType().toString();
-                    SimpleCurrencies.addCurrency(SimpleCurrencies.getSellingCurrency(stringToCheck.toLowerCase()), player, SimpleCurrencies.getSellingPrice(stringToCheck) * items[i].getAmount());
-                    itemsSold += items[i].getAmount();
+                try {
+                    if (list.contains(items[i].getType().toString())) {
+                        inventory.remove(items[i]);
+                        String stringToCheck = items[i].getType().toString();
+                        SimpleCurrencies.addCurrency(SimpleCurrencies.getSellingCurrency(stringToCheck.toLowerCase()), player, SimpleCurrencies.getSellingPrice(stringToCheck) * items[i].getAmount());
+                        itemsSold += items[i].getAmount();
+                    }
+                }catch(Exception e){
+                    player.sendMessage("A problem has occurred. Please report this to the plugin developer!");
                 }
             }
             if(itemsSold > 0){

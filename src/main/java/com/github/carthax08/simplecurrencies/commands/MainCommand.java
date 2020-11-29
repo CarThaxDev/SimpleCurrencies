@@ -64,7 +64,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.addCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    SimpleCurrencies.addCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -86,7 +86,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.setCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    SimpleCurrencies.setCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -108,7 +108,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.removeCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    SimpleCurrencies.removeCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -184,7 +184,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.addCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    SimpleCurrencies.addCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -206,7 +206,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.setCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    SimpleCurrencies.setCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{
@@ -228,7 +228,7 @@ public class MainCommand implements CommandExecutor {
             }else{
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
-                    SimpleCurrencies.removeCurrency(args[1], playerToEdit, Integer.parseInt(args[3]));
+                    SimpleCurrencies.removeCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage("Success!");
                     return true;
                 }else{

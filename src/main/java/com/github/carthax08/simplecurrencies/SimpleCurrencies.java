@@ -77,19 +77,22 @@ public final class SimpleCurrencies extends JavaPlugin {
     public static void saveConfigFile(){
         instance.saveConfig();
     }
+    public static Boolean  checkCurrency(String currencyToCheck){
+        return instance.getConfig().getBoolean("currencies." + currencyToCheck + ".enabled");
+    }
 
 
 
     //API for Online Players
-    public static void removeCurrency(String currencyToEdit, Player playerToEdit, int amountToRemove){
+    public static void removeCurrency(String currencyToEdit, Player playerToEdit, Double amountToRemove){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
         saveConfigFile();
     }
-    public static void addCurrency(String currencyToEdit, Player playerToEdit, int amountToAdd){
+    public static void addCurrency(String currencyToEdit, Player playerToEdit, Double amountToAdd){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
         saveConfigFile();
     }
-    public static void setCurrency(String currencyToEdit, Player playerToEdit, int amountToSet){
+    public static void setCurrency(String currencyToEdit, Player playerToEdit, Double amountToSet){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, amountToSet);
         saveConfigFile();
     }
@@ -97,18 +100,20 @@ public final class SimpleCurrencies extends JavaPlugin {
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, 0);
         saveConfigFile();
     }
-    public static int getCurrency(String currencyToGet, Player playerToGetFrom){
-        return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
+    public static Double getCurrency(String currencyToGet, Player playerToGetFrom){
+        return instance.getConfig().getDouble("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
 
-
+    public static SimpleCurrencies getInstance(){
+        return instance;
+    }
 
     //API for Offline Players
-    public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, int amountToAdd){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
+    public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToAdd){
+        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getDouble("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
         saveConfigFile();
     }
-    public static void setCurrency(String currencyToEdit, OfflinePlayer playerToEdit, int amountToSet){
+    public static void setCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToSet){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, amountToSet);
         saveConfigFile();
     }
@@ -116,16 +121,16 @@ public final class SimpleCurrencies extends JavaPlugin {
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, 0);
         saveConfigFile();
     }
-    public static void removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, int amountToRemove){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getInt("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
+    public static void removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToRemove){
+        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getDouble("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
         saveConfigFile();
         saveConfigFile();
     }
-    public static int getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
-        return instance.getConfig().getInt("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
+    public static Double getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
+        return instance.getConfig().getDouble("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
-    public static int getSellingPrice(String nameToCheck){
-        return sellConfig.getInt("prices." + nameToCheck + ".value");
+    public static Double getSellingPrice(String nameToCheck){
+        return sellConfig.getDouble("prices." + nameToCheck + ".value");
     }
     public static String getSellingCurrency(String nameToCheck){
         return sellConfig.getString("prices." + nameToCheck + ".currency");

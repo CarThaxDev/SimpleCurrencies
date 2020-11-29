@@ -1,10 +1,17 @@
 name: SimpleCurrencies
+
 version: ${project.version}
+
 main: com.github.carthax08.simplecurrencies.SimpleCurrencies
+
 prefix: SimpleCurrencies
+
 authors: [ CarThax08 ]
+
 description: Adds a few simple currencies to the game. Check the config!
+
 website: github.com/CarThax08/SimpleCurrencies
+
 commands:
   simplecurrencies:
     usage: /simplecurrencies [add, set, remove, clear, reload] [currency] [player] [amount to add, set to, or remove]
@@ -18,4 +25,9 @@ commands:
     usage: /sendcurrency [currency] [player] [amount[
     description: Send a certain amount of currency to another player provided you have enough.
     aliases: [sc, send, scurrency, sendc, paycurrency]
+  balance:
+    usage: /balance [currency]
+    description: Gets your balance of the currency you provided
+    aliases: [bal]
+
 softdepend: [PlaceholderAPI]
