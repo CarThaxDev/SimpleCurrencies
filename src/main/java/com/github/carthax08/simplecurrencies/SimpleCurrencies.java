@@ -103,7 +103,6 @@ public final class SimpleCurrencies extends JavaPlugin {
     public static void removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToRemove){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getDouble("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
         saveConfigFile();
-        saveConfigFile();
     }
     public static Double getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
         return instance.getConfig().getDouble("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
