@@ -43,7 +43,7 @@ public class SimpleCurrenciesExpansion extends PlaceholderExpansion {
         if(player == null){
             return "";
         }
-            if (plugin.getConfig().isSet("currencies." + identifier + "enabled")) {
+            if (plugin.getConfig().getBoolean("currencies." + identifier + ".enabled")) {
                 return Currencies.getCurrency(identifier, player).toString();
             }
 
