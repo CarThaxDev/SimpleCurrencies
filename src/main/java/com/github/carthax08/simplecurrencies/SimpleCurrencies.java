@@ -2,12 +2,10 @@ package com.github.carthax08.simplecurrencies;
 
 import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpansion;
 import com.github.carthax08.simplecurrencies.commands.*;
-import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Random;
@@ -44,16 +42,13 @@ public final class SimpleCurrencies extends JavaPlugin {
         if(!getConfig().getBoolean("settings.hasBeenEdited")){
             getServer().getLogger().warning("[SimpleCurrencies] You are still using the default config! Please edit it.");
         }
-
+        //Placeholders setup
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new SimpleCurrenciesExpansion(this).register();
+        }
         //API Setup
         instance = this;
 
-        //PlaceholderAPI Registration
-        if(getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new SimpleCurrenciesExpansion(this);
-        }else{
-            getServer().getLogger().info("[SimpleCurrencies] PlaceholderAPI is not installed! it is recommended you install it!");
-        }
         //Rating Message
         int i = rand.nextInt(100);
         if(i > 10 && i < 15){
