@@ -4,6 +4,7 @@ import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.enums.CommandType;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,8 +31,8 @@ public class MainCommand implements CommandExecutor {
                 return true;
             } else {
                 if (args.length == 0) {
-                    player.sendMessage("You must provide an operation, currency, player, and amount!");
-                    return false;
+                    player.sendMessage(ChatColor.RED + "Please provide an operation (add, set, remove, clear, reload), currency, player, and amount!");
+                    return true;
                 } else {
                     for (Player player1 : Bukkit.getOnlinePlayers()) {
                         if (player1.getName().equals(args[2])) {
@@ -43,8 +44,8 @@ public class MainCommand implements CommandExecutor {
                             return handleCommand(offlinePlayer, args, player);
                         }
                     }
-                    return false;
                 }
+                return false;
             }
         } else {
             return true;
@@ -90,10 +91,9 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide an amount!");
                 return false;
             }else{
-                FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
                     addCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
-                    player.sendMessage("Success!");
+                    player.sendMessage(ChatColor.GREEN + "Successfully added " + args[3] + " " + args[1].toLowerCase() + " to player " + args[2]);
                     return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
@@ -115,7 +115,7 @@ public class MainCommand implements CommandExecutor {
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
                     setCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
-                    player.sendMessage("Success!");
+                    player.sendMessage(ChatColor.GREEN + "Successfully set "+ args[1].toLowerCase() + " of player " + args[2] + " to " + args[3]);
                     return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
@@ -137,7 +137,7 @@ public class MainCommand implements CommandExecutor {
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
                     removeCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
-                    player.sendMessage("Success!");
+                    player.sendMessage(ChatColor.GREEN + "Successfully removed " + args[3] + " " + args[1].toLowerCase() + " from player " + args[2]);
                     return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
@@ -156,6 +156,7 @@ public class MainCommand implements CommandExecutor {
                 FileConfiguration config = plugin.getConfig();
                 if(checkCurrencyType(args[1])){
                     clearCurrency(args[1], playerToEdit);
+                    player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[2] + "'s " + args[1]);
                     plugin.saveConfig();
                     return true;
                 }else{
@@ -167,6 +168,7 @@ public class MainCommand implements CommandExecutor {
         if(checkCommandType(args[0]) == CommandType.RELOAD){
             plugin.reloadConfig();
             PricesConfig.reloadConfig();
+            player.sendMessage(ChatColor.GREEN + "Successfully reload the config");
         }
         return false;
     }
