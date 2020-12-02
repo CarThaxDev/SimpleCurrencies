@@ -32,17 +32,11 @@ public class SellCommand implements CommandExecutor {
                     for (ItemStack item : items) {
                         try {
                             if(item != null) {
-                                player.sendMessage(Arrays.toString(items));
                                 if (config.isSet("prices." + item.getType().toString().toLowerCase() + ".price")) {
-                                    player.sendMessage("start!");
                                     inventory.remove(item);
-                                    player.sendMessage("1");
                                     String stringToCheck = item.getType().toString().toLowerCase();
-                                    player.sendMessage("2");
                                     addCurrency(getSellingCurrency(stringToCheck.toLowerCase()), player, getSellingPrice(stringToCheck) * item.getAmount());
-                                    player.sendMessage("3");
                                     itemsSold += item.getAmount();
-                                    player.sendMessage("4");
                                 }
                             }
                         } catch (Exception e) {
@@ -59,12 +53,14 @@ public class SellCommand implements CommandExecutor {
                     return true;
                 }
             }else{
+                int itemsSold = 0;
                 ItemStack itemToSell = player.getInventory().getItemInMainHand();
                 player.sendMessage(itemToSell.getType().toString().toLowerCase());
                 if(PricesConfig.getConfig().isSet("prices." + itemToSell.getType().toString().toLowerCase() + ".price")){
                     String stringToCheck = itemToSell.getType().getKey().toString();
                     addCurrency(getSellingCurrency(stringToCheck.toLowerCase()), player, getSellingPrice(stringToCheck) * itemToSell.getAmount());
                     player.getInventory().remove(itemToSell);
+                    itemsSold += itemToSell.getAmount();
                 }
                 return true;
             }

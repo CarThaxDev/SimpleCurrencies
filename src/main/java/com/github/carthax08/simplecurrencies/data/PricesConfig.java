@@ -6,13 +6,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PricesConfig {
     private static File file;
     private static FileConfiguration customConfig;
-    private static List<String> list = new ArrayList<String>();
 
     public static void setupConfig(){
         file = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), "prices.yml");
@@ -25,19 +22,11 @@ public class PricesConfig {
             }
         }else{
             customConfig = YamlConfiguration.loadConfiguration(file);
-            for(int i = 0; i < customConfig.getList("items").toArray().length; i++){
-                list.add(customConfig.getList("items").get(i).toString());
-            }
         }
     }
 
     private static void addDefaultValues() {
 
-        list.add("coal");
-        list.add("iron_ore");
-        list.add("gold_ore");
-        list.add("diamond");
-        list.add("emerald");
         //Prices
         customConfig.set("prices.coal.price", 0.50);
         customConfig.set("prices.iron_ore.price", 3.00);
@@ -50,7 +39,6 @@ public class PricesConfig {
         customConfig.set("prices.gold_ore.currency", "money");
         customConfig.set("prices.diamond.currency", "money");
         customConfig.set("prices.emerald.currency", "money");
-        customConfig.set("items", list);
         saveConfig();
     }
 

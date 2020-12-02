@@ -1,9 +1,12 @@
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/SimpleCurrencies.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/PapiExpansion/SimpleCurrenciesExpansion.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/commands/SellCommand.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/enums/CommandType.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/commands/PayCommand.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/data/PricesConfig.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/events/onPlayerJoinEvent.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/commands/GetCommand.java
-/Users/marythackston/IdeaProjects/SimpleCurrencies/src/main/java/com/github/carthax08/simplecurrencies/commands/MainCommand.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\commands\PayCommand.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\events\onPlayerJoinEvent.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\commands\BalanceCommand.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\SimpleCurrencies.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\commands\GetCommand.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\api\Config.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\data\PricesConfig.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\PapiExpansion\SimpleCurrenciesExpansion.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\api\Currencies.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\commands\MainCommand.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\enums\CommandType.java
+E:\Java Projects\SimpleCurrencies\SimpleCurrencies\src\main\java\com\github\carthax08\simplecurrencies\commands\SellCommand.java
