@@ -19,13 +19,13 @@ public class PricesConfig {
         if(!file.exists()){
             try {
                 file.createNewFile();
-                customConfig = YamlConfiguration.loadConfiguration(file);
                 addDefaultValues();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else{
-            for(int i = 0; i < customConfig.getList("items").size(); i++){
+            customConfig = YamlConfiguration.loadConfiguration(file);
+            for(int i = 0; i < customConfig.getList("items").toArray().length; i++){
                 list.add(customConfig.getList("items").get(i).toString());
             }
         }

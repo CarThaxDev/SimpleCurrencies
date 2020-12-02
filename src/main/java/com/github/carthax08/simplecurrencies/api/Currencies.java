@@ -31,7 +31,7 @@ public class Currencies {
         return instance.getConfig().getDouble("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
     }
     public static Double getSellingPrice(String nameToCheck){
-        return sellConfig.getDouble("prices." + nameToCheck + ".value");
+        return sellConfig.getDouble("prices." + nameToCheck + ".price");
     }
     public static String getSellingCurrency(String nameToCheck){
         return sellConfig.getString("prices." + nameToCheck + ".currency");

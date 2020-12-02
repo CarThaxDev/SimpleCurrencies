@@ -2,6 +2,7 @@ package com.github.carthax08.simplecurrencies;
 
 import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpansion;
 import com.github.carthax08.simplecurrencies.commands.*;
+import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,7 +27,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getCommand("getcurrency").setExecutor(new GetCommand(this));
         getCommand("sendcurrency").setExecutor(new PayCommand());
         getCommand("balance").setExecutor(new BalanceCommand());
-        //getCommand("sell").setExecutor(new SellCommand());
+        getCommand("sell").setExecutor(new SellCommand());
 
         //Event Registration
         getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
@@ -36,8 +37,8 @@ public final class SimpleCurrencies extends JavaPlugin {
         saveDefaultConfig();
 
         //Shop Config Registration
-        //PricesConfig.setupConfig();
-        //sellConfig = PricesConfig.getConfig();
+        PricesConfig.setupConfig();
+        sellConfig = PricesConfig.getConfig();
 
         if(!getConfig().getBoolean("settings.hasBeenEdited")){
             getServer().getLogger().warning("[SimpleCurrencies] You are still using the default config! Please edit it.");

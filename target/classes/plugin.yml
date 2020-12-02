@@ -1,15 +1,10 @@
 name: SimpleCurrencies
-
+api-version: 1.13
 version: 1.0
-
 main: com.github.carthax08.simplecurrencies.SimpleCurrencies
-
 prefix: SimpleCurrencies
-
 authors: [ CarThax08 ]
-
 description: Adds a few simple currencies to the game. Check the config!
-
 website: github.com/CarThax08/SimpleCurrencies
 
 commands:
@@ -23,12 +18,15 @@ commands:
     aliases: [get, gc, getc, gcurrency]
     permission: simplecurrencies.getotherbalances
   sendcurrency:
-    usage: /sendcurrency [currency] [player] [amount}
+    usage: /sendcurrency [currency] [player] [amount]
     description: Send a certain amount of currency to another player provided you have enough.
     aliases: [sc, send, scurrency, sendc, paycurrency]
   balance:
     usage: /balance [currency]
     description: Gets your balance of the currency you provided
     aliases: [bal]
+  sell:
+    usage: /sell (all)
+    description: Sells all avaliable items in your inventory that can be sold.
 
 softdepend: [PlaceholderAPI]
