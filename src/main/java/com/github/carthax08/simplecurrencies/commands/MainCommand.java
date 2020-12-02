@@ -80,8 +80,7 @@ public class MainCommand implements CommandExecutor {
 
     public boolean handleCommand(OfflinePlayer playerToEdit, String[] args, Player player){
         if(checkCommandType(args[0]) == CommandType.ADD){
-            if(checkArgsLength(args) == 0){
-            }else if(checkArgsLength(args) == 1){
+            if(checkArgsLength(args) == 1){
                 player.sendMessage("Please provide a currency, player, and amount");
                 return false;
             }else if(checkArgsLength(args) == 2){
