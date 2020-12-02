@@ -61,6 +61,7 @@ public class SellCommand implements CommandExecutor {
                     addCurrency(getSellingCurrency(stringToCheck.toLowerCase()), player, getSellingPrice(stringToCheck) * itemToSell.getAmount());
                     player.getInventory().remove(itemToSell);
                     itemsSold += itemToSell.getAmount();
+                    player.sendMessage(ChatColor.GREEN + "Successfully sold " + itemsSold + " " + itemToSell.getType().toString().toLowerCase());
                 }
                 return true;
             }
