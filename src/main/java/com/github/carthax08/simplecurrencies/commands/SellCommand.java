@@ -1,7 +1,6 @@
 
 package com.github.carthax08.simplecurrencies.commands;
 
-import com.github.carthax08.simplecurrencies.api.Currencies;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,7 +12,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 
 import static com.github.carthax08.simplecurrencies.api.Currencies.*;
 
