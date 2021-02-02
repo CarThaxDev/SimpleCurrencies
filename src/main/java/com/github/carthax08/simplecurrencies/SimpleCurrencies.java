@@ -8,6 +8,7 @@ import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Random;
@@ -73,7 +74,9 @@ public final class SimpleCurrencies extends JavaPlugin {
         saveConfig();
         getServer().getLogger().info("[SimpleCurrencies] Config Saved...");
         getServer().getLogger().info("[SimpleCurrentins} Saving Player Data...");
-        PlayerConfig.saveAllData();
+        for(Player player : Bukkit.getOnlinePlayers()){
+            PlayerConfig.saveConfig(player.getUniqueId().toString());
+        }
 
 
         getServer().getLogger().info("[SimpleCurrencies] The plugin has finished shutting down.");

@@ -1,10 +1,8 @@
 package com.github.carthax08.simplecurrencies.data;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,31 +34,19 @@ public class PlayerConfig {
         return playerConfigMap.get(UUID);
     }
 
-    public static void saveConfig(String UUID){
+    public static boolean saveConfig(String UUID){
         try {
-            playerConfigMap.get(UUID).save(file);
+            YamlConfiguration config = playerConfigMap.get(UUID);
+            File f = fileConfigMap.get(config);
+            config.save(f);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
     public static void reloadConfig(String UUID){
         playerConfigMap.replace(UUID, YamlConfiguration.loadConfiguration(file));
     }
 
-    public static void saveAllData() {
-        try{
-            for(OfflinePlayer player : Bukkit.getOfflinePlayers()){
-                if(playerConfigMap.get(player.getUniqueId().toString()) != null){
-                    playerConfigMap.get(player.getUniqueId().toString()).save(new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), player.getUniqueId().toString() + ".yml"));
-                }
-            }
-            for(Player player : Bukkit.getOnlinePlayers()){
-                if(playerConfigMap.get(player.getUniqueId().toString()) != null){
-                    playerConfigMap.get(player.getUniqueId().toString()).save(new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), player.getUniqueId().toString() + ".yml"));
-                }
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
 }
