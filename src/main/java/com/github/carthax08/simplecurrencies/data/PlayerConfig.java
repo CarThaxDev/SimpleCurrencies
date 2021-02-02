@@ -45,8 +45,14 @@ public class PlayerConfig {
             return false;
         }
     }
+    public static void removeConfigFromMap(String UUID){
+        YamlConfiguration config = playerConfigMap.get(UUID);
+        playerConfigMap.remove(UUID);
+        fileConfigMap.remove(config);
+    }
     public static void reloadConfig(String UUID){
-        playerConfigMap.replace(UUID, YamlConfiguration.loadConfiguration(file));
+        File file1 = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");
+        playerConfigMap.replace(UUID, YamlConfiguration.loadConfiguration(file1));
     }
 
 }
