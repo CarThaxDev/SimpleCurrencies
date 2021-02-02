@@ -10,10 +10,8 @@
 # Please note that you have to get the item ids
 
 currencies:
-  tickets:
-    enabled: true
-  money:
-    enabled: true
+  - tickets
+  - money
 settings:
   hasBeenEdited: false
 players:

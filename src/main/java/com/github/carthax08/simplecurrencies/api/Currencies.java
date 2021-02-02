@@ -1,6 +1,7 @@
 package com.github.carthax08.simplecurrencies.api;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
+import com.github.carthax08.simplecurrencies.data.PlayerConfig;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,22 +14,18 @@ public class Currencies {
 
     public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToAdd){
         instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getDouble("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) + amountToAdd);
-        saveConfigFile();
     }
     public static void setCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToSet){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, amountToSet);
-        saveConfigFile();
+        PlayerConfig.getConfig(playerToEdit.getUniqueId().toString()).set(currencyToEdit, amountToSet);
     }
     public static void clearCurrency(String currencyToEdit, OfflinePlayer playerToEdit){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, 0);
-        saveConfigFile();
+        PlayerConfig.getConfig(playerToEdit.getUniqueId().toString()).set(currencyToEdit, 0);
     }
     public static void removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToRemove){
-        instance.getConfig().set("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit, instance.getConfig().getDouble("players." + playerToEdit.getUniqueId().toString() + "." + currencyToEdit) - amountToRemove);
-        saveConfigFile();
+        PlayerConfig.getConfig(playerToEdit.getUniqueId().toString()).set(currencyToEdit, PlayerConfig.getConfig(playerToEdit.getUniqueId().toString()).getDouble(currencyToEdit) - amountToRemove);
     }
     public static Double getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
-        return instance.getConfig().getDouble("players." + playerToGetFrom.getUniqueId().toString() + "." + currencyToGet);
+        return PlayerConfig.getConfig(playerToGetFrom.getUniqueId().toString()).getDouble(currencyToGet);
     }
     public static Double getSellingPrice(String nameToCheck){
         return sellConfig.getDouble("prices." + nameToCheck + ".price");

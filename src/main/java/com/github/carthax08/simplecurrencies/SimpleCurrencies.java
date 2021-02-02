@@ -2,6 +2,7 @@ package com.github.carthax08.simplecurrencies;
 
 import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpansion;
 import com.github.carthax08.simplecurrencies.commands.*;
+import com.github.carthax08.simplecurrencies.data.PlayerConfig;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import org.bukkit.Bukkit;
@@ -71,6 +72,10 @@ public final class SimpleCurrencies extends JavaPlugin {
         getServer().getLogger().info("[SimpleCurrencies] Saving Config...");
         saveConfig();
         getServer().getLogger().info("[SimpleCurrencies] Config Saved...");
+        getServer().getLogger().info("[SimpleCurrentins} Saving Player Data...");
+        PlayerConfig.saveAllData();
+
+
         getServer().getLogger().info("[SimpleCurrencies] The plugin has finished shutting down.");
     }
 

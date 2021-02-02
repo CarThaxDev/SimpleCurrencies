@@ -1,9 +1,14 @@
 package com.github.carthax08.simplecurrencies.events;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
+import com.github.carthax08.simplecurrencies.api.Config;
+import com.github.carthax08.simplecurrencies.data.PlayerConfig;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import java.util.List;
 
 public class onPlayerJoinEvent implements Listener {
 
@@ -13,9 +18,13 @@ public class onPlayerJoinEvent implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
-        if(!plugin.getConfig().getBoolean("players." + event.getPlayer().getUniqueId().toString() + ".hasJoinedBefore")){
-            plugin.getConfig().set("players." + event.getPlayer().getUniqueId().toString() + ".hasJoinedBefore", true);
-            plugin.saveConfig();
+        if(!event.getPlayer().hasPlayedBefore()){
+            String UUID = event.getPlayer().getUniqueId().toString();
+            PlayerConfig.createPlayerConfig(UUID);
+            List<String> currencyList = Config.getCurrencyList();
+            for(String currency : currencyList){
+                PlayerConfig.getConfig(UUID).set(currency, 0);
+            }
         }
     }
 }
