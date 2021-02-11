@@ -39,7 +39,7 @@ public class SellCommand implements CommandExecutor {
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                            player.sendMessage("A problem has occurred. Please report this to the plugin developer!");
+                            player.sendMessage(ChatColor.RED + "A problem has occurred. Please report this to the server owner and have them report it to the developer!");
                             return true;
                         }
                     }

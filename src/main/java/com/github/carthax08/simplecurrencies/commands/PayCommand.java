@@ -1,6 +1,5 @@
 package com.github.carthax08.simplecurrencies.commands;
 
-import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -10,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.github.carthax08.simplecurrencies.api.Config.*;
 import static com.github.carthax08.simplecurrencies.api.Currencies.*;
 
 public class PayCommand implements CommandExecutor {

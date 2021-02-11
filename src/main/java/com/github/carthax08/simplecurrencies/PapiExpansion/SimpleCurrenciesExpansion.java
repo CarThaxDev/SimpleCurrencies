@@ -1,6 +1,7 @@
 package com.github.carthax08.simplecurrencies.PapiExpansion;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
+import com.github.carthax08.simplecurrencies.api.Config;
 import com.github.carthax08.simplecurrencies.api.Currencies;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
@@ -43,7 +44,7 @@ public class SimpleCurrenciesExpansion extends PlaceholderExpansion {
         if(player == null){
             return "";
         }
-            if (plugin.getConfig().getBoolean("currencies." + identifier + ".enabled")) {
+            if (Config.checkCurrency(identifier)) {
                 return Currencies.getCurrency(identifier, player).toString();
             }
 

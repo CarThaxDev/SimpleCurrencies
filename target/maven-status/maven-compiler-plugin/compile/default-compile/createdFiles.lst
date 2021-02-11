@@ -1,3 +1,4 @@
+com\github\carthax08\simplecurrencies\events\onPlayerLeaveEvent.class
 com\github\carthax08\simplecurrencies\commands\BalanceCommand.class
 com\github\carthax08\simplecurrencies\enums\CommandType.class
 com\github\carthax08\simplecurrencies\api\Currencies.class
@@ -5,6 +6,7 @@ com\github\carthax08\simplecurrencies\commands\MainCommand.class
 com\github\carthax08\simplecurrencies\api\Config.class
 com\github\carthax08\simplecurrencies\PapiExpansion\SimpleCurrenciesExpansion.class
 com\github\carthax08\simplecurrencies\data\PricesConfig.class
+com\github\carthax08\simplecurrencies\data\PlayerConfig.class
 com\github\carthax08\simplecurrencies\commands\GetCommand.class
 com\github\carthax08\simplecurrencies\events\onPlayerJoinEvent.class
 com\github\carthax08\simplecurrencies\commands\SellCommand.class

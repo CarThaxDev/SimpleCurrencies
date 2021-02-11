@@ -3,7 +3,6 @@ package com.github.carthax08.simplecurrencies.events;
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import com.github.carthax08.simplecurrencies.api.Config;
 import com.github.carthax08.simplecurrencies.data.PlayerConfig;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

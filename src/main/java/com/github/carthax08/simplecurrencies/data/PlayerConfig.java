@@ -11,7 +11,6 @@ import java.util.HashMap;
 public class PlayerConfig {
     private static File file;
     private static HashMap<String, YamlConfiguration> playerConfigMap = new HashMap<>();
-    private static HashMap<YamlConfiguration, File> fileConfigMap = new HashMap<>();
 
     public static void createPlayerConfig(String UUID){
         file = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");
@@ -19,14 +18,12 @@ public class PlayerConfig {
             try {
                 file.createNewFile();
                 playerConfigMap.put(UUID, YamlConfiguration.loadConfiguration(file));
-                fileConfigMap.put(YamlConfiguration.loadConfiguration(file), file);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else{
             playerConfigMap.put(UUID, YamlConfiguration.loadConfiguration(file));
-            fileConfigMap.put(YamlConfiguration.loadConfiguration(file), file);
         }
     }
 
@@ -37,7 +34,7 @@ public class PlayerConfig {
     public static boolean saveConfig(String UUID){
         try {
             YamlConfiguration config = playerConfigMap.get(UUID);
-            File f = fileConfigMap.get(config);
+            File f = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");
             config.save(f);
             return true;
         } catch (IOException e) {
@@ -48,7 +45,6 @@ public class PlayerConfig {
     public static void removeConfigFromMap(String UUID){
         YamlConfiguration config = playerConfigMap.get(UUID);
         playerConfigMap.remove(UUID);
-        fileConfigMap.remove(config);
     }
     public static void reloadConfig(String UUID){
         File file1 = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");

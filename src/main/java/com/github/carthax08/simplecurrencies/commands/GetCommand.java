@@ -1,6 +1,7 @@
 package com.github.carthax08.simplecurrencies.commands;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
+import com.github.carthax08.simplecurrencies.api.Currencies;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +27,7 @@ public class GetCommand implements CommandExecutor {
              return false;
          }else{
              Player player2 = Bukkit.getPlayer(args[1]);
-             sender.sendMessage(args[1] + " has " + plugin.getConfig().getDouble("players." + player.getUniqueId().toString() + "." + args[0]) + " " + args[0]);
+             player.sendMessage(args[1] + " has " + Currencies.getCurrency(args[0], player) + "." + args[0] + " " + args[0]);
              return true;
          }
     }else{
@@ -35,7 +36,7 @@ public class GetCommand implements CommandExecutor {
                 return false;
             }else{
                 Player player = Bukkit.getPlayer(args[1]);
-                sender.sendMessage(args[1] + " has " + plugin.getConfig().getInt("players." + player.getUniqueId().toString() + "." + args[0]) + " " + args[0]);
+                sender.sendMessage(args[1] + " has " + Currencies.getCurrency(args[0], player) + "." + args[0] + " " + args[0]);
                 return true;
             }
         }

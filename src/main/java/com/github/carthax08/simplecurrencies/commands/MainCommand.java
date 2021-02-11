@@ -48,13 +48,11 @@ public class MainCommand implements CommandExecutor {
                 return false;
             }
         } else {
+            sender.sendMessage(ChatColor.RED + "You must be a player to run this command!");
             return true;
         }
     }
 
-    public boolean checkCurrencyType(String stringToCheck) {
-        return plugin.getConfig().getBoolean("currencies." + stringToCheck.toLowerCase() + ".enabled");
-    }
 
     public CommandType checkCommandType(String stringToCheck){
         if(stringToCheck.equalsIgnoreCase("add")){
@@ -90,7 +88,7 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide an amount!");
                 return false;
             }else{
-                if(checkCurrencyType(args[1])){
+                if(checkCurrency(args[1])){
                     addCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage(ChatColor.GREEN + "Successfully added " + args[3] + " " + args[1].toLowerCase() + " to player " + args[2]);
                     return true;
@@ -112,7 +110,7 @@ public class MainCommand implements CommandExecutor {
                 return false;
             }else{
                 FileConfiguration config = plugin.getConfig();
-                if(checkCurrencyType(args[1])){
+                if(checkCurrency(args[1])){
                     setCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage(ChatColor.GREEN + "Successfully set "+ args[1].toLowerCase() + " of player " + args[2] + " to " + args[3]);
                     return true;
@@ -134,7 +132,7 @@ public class MainCommand implements CommandExecutor {
                 return false;
             }else{
                 FileConfiguration config = plugin.getConfig();
-                if(checkCurrencyType(args[1])){
+                if(checkCurrency(args[1])){
                     removeCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage(ChatColor.GREEN + "Successfully removed " + args[3] + " " + args[1].toLowerCase() + " from player " + args[2]);
                     return true;
@@ -153,7 +151,7 @@ public class MainCommand implements CommandExecutor {
                 return false;
             }else{
                 FileConfiguration config = plugin.getConfig();
-                if(checkCurrencyType(args[1])){
+                if(checkCurrency(args[1])){
                     clearCurrency(args[1], playerToEdit);
                     player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[2] + "'s " + args[1]);
                     plugin.saveConfig();
