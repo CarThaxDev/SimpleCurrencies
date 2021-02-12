@@ -20,9 +20,8 @@ public class PricesConfig {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else{
-            customConfig = YamlConfiguration.loadConfiguration(file);
         }
+            customConfig = YamlConfiguration.loadConfiguration(file);
     }
 
     private static void addDefaultValues() {
