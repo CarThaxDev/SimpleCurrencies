@@ -1,5 +1,7 @@
 package com.github.carthax08.simplecurrencies.data;
 
+import com.github.carthax08.simplecurrencies.SimpleCurrencies;
+import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,16 +14,20 @@ public class PricesConfig {
     private static FileConfiguration customConfig;
 
     public static void setupConfig(){
-        file = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), "prices.yml");
-        if(!file.exists()){
+        file = new File(SimpleCurrencies.getInstance().getDataFolder(), "prices.yml");
+        if(!file.exists()) {
             try {
                 file.createNewFile();
                 addDefaultValues();
-            } catch (IOException e) {
+                customConfig = YamlConfiguration.loadConfiguration(file);
+            } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
+                if (e instanceof NullPointerException) {
+                    System.out.println(file);
+                }
             }
         }
-            customConfig = YamlConfiguration.loadConfiguration(file);
+        customConfig = YamlConfiguration.loadConfiguration(file);
     }
 
     private static void addDefaultValues() {
