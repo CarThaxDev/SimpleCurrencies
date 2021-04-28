@@ -9,7 +9,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import static com.github.carthax08.simplecurrencies.api.Config.checkCurrency;
@@ -117,7 +116,6 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 return false;
             }else{
-                FileConfiguration config = plugin.getConfig();
                 if(checkCurrency(args[1])){
                     setCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage(ChatColor.GREEN + "Successfully set "+ args[1].toLowerCase() + " of player " + args[2] + " to " + args[3]);
@@ -139,7 +137,6 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide an amount!");
                 return false;
             }else{
-                FileConfiguration config = plugin.getConfig();
                 if(checkCurrency(args[1])){
                     removeCurrency(args[1], playerToEdit, Double.parseDouble(args[3]));
                     player.sendMessage(ChatColor.GREEN + "Successfully removed " + args[3] + " " + args[1].toLowerCase() + " from player " + args[2]);
@@ -158,7 +155,6 @@ public class MainCommand implements CommandExecutor {
                 player.sendMessage("Please provide a player and amount!");
                 return false;
             }else{
-                FileConfiguration config = plugin.getConfig();
                 if(checkCurrency(args[1])){
                     clearCurrency(args[1], playerToEdit);
                     player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[2] + "'s " + args[1]);
