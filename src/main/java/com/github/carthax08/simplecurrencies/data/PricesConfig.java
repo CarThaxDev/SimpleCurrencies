@@ -18,8 +18,8 @@ public class PricesConfig {
         if(!file.exists()) {
             try {
                 file.createNewFile();
-                addDefaultValues();
                 customConfig = YamlConfiguration.loadConfiguration(file);
+                addDefaultValues();
             } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
                 if (e instanceof NullPointerException) {

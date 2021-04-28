@@ -12,7 +12,7 @@ public class PlayerConfig {
     private static File file;
     private static HashMap<String, YamlConfiguration> playerConfigMap = new HashMap<>();
 
-    public static void createPlayerConfig(String UUID){
+    public static YamlConfiguration createPlayerConfig(String UUID){
         file = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");
         if(!file.exists()){
             try {
@@ -25,6 +25,7 @@ public class PlayerConfig {
         }else{
             playerConfigMap.put(UUID, YamlConfiguration.loadConfiguration(file));
         }
+        return YamlConfiguration.loadConfiguration(file);
     }
 
     public static FileConfiguration getConfig(String UUID){

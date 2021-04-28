@@ -22,6 +22,10 @@ public final class SimpleCurrencies extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        //API Setup
+        instance = this;
+
         // Plugin startup logic
         rand = new Random();
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The plugin is initializing... Please wait.");
@@ -49,10 +53,10 @@ public final class SimpleCurrencies extends JavaPlugin {
         //Placeholders setup
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
             new SimpleCurrenciesExpansion(this).register();
+            getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "PlaceholderAPI hook registered.");
+        }else{
+            getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "PlaceholderAPI not detected, skipping hook.");
         }
-        getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "PlaceholderAPI hook registered.");
-        //API Setup
-        instance = this;
 
         //Rating Message
         int i = rand.nextInt(1000);
