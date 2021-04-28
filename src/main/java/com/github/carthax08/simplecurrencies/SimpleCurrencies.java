@@ -5,6 +5,7 @@ import com.github.carthax08.simplecurrencies.commands.*;
 import com.github.carthax08.simplecurrencies.data.PlayerConfig;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
+import com.github.carthax08.simplecurrencies.events.onPlayerLeaveEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,6 +40,7 @@ public final class SimpleCurrencies extends JavaPlugin {
 
         //Event Registration
         getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new onPlayerLeaveEvent(), this);
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "Event registration finished.");
 
         //Config Registration

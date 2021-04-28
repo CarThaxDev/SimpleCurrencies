@@ -36,6 +36,7 @@ public class PlayerConfig {
     public static void saveConfig(String UUID){
         try {
             YamlConfiguration config = playerConfigMap.get(UUID);
+            System.out.println(SimpleCurrencies.getInstance().getDataFolder().toString());
             File f = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
             config.save(f);
             removeConfigFromMap(UUID);
