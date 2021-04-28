@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import static com.github.carthax08.simplecurrencies.api.Config.*;
+import static com.github.carthax08.simplecurrencies.api.Config.checkCurrency;
 import static com.github.carthax08.simplecurrencies.api.Currencies.*;
 
 public class MainCommand implements CommandExecutor {

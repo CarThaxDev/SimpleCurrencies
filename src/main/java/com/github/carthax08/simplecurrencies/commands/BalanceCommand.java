@@ -1,6 +1,5 @@
 package com.github.carthax08.simplecurrencies.commands;
 
-import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.github.carthax08.simplecurrencies.api.Config.*;
-import static com.github.carthax08.simplecurrencies.api.Currencies.*;
+import static com.github.carthax08.simplecurrencies.api.Config.checkCurrency;
+import static com.github.carthax08.simplecurrencies.api.Currencies.getCurrency;
 
 public class BalanceCommand implements CommandExecutor {
     @Override

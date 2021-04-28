@@ -1,8 +1,6 @@
 package com.github.carthax08.simplecurrencies.data;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
-import org.apache.commons.lang.ObjectUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 

@@ -1,8 +1,9 @@
 package com.github.carthax08.simplecurrencies.data;
 
-import org.bukkit.Bukkit;
+import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class PlayerConfig {
     private static HashMap<String, YamlConfiguration> playerConfigMap = new HashMap<>();
 
     public static YamlConfiguration createPlayerConfig(String UUID){
-        file = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");
+        file = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
         if(!file.exists()){
             try {
                 file.createNewFile();
@@ -28,19 +29,18 @@ public class PlayerConfig {
         return YamlConfiguration.loadConfiguration(file);
     }
 
-    public static FileConfiguration getConfig(String UUID){
+    public static YamlConfiguration getConfig(String UUID){
         return playerConfigMap.get(UUID);
     }
 
-    public static boolean saveConfig(String UUID){
+    public static void saveConfig(String UUID){
         try {
             YamlConfiguration config = playerConfigMap.get(UUID);
-            File f = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");
+            File f = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
             config.save(f);
-            return true;
+            removeConfigFromMap(UUID);
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
     public static void removeConfigFromMap(String UUID){
@@ -48,8 +48,15 @@ public class PlayerConfig {
         playerConfigMap.remove(UUID);
     }
     public static void reloadConfig(String UUID){
-        File file1 = new File(Bukkit.getPluginManager().getPlugin("SimpleCurrencies").getDataFolder(), UUID + ".yml");
+        File file1 = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
         playerConfigMap.replace(UUID, YamlConfiguration.loadConfiguration(file1));
     }
+
+    public static void replaceConfigInMap(YamlConfiguration config, String UUID){
+        if(playerConfigMap.containsKey(UUID)){
+            playerConfigMap.replace(UUID, config);
+        }
+    }
+
 
 }

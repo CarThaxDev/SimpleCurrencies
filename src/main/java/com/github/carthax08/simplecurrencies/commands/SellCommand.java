@@ -12,7 +12,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-
 import static com.github.carthax08.simplecurrencies.api.Currencies.*;
 
 public class SellCommand implements CommandExecutor {

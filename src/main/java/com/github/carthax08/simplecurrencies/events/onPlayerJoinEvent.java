@@ -25,6 +25,7 @@ public class onPlayerJoinEvent implements Listener {
             for(String currency : currencyList){
                 config.set(currency, 0);
             }
+            PlayerConfig.replaceConfigInMap(config, UUID);
             PlayerConfig.saveConfig(event.getPlayer().getUniqueId().toString());
         }else{
             PlayerConfig.createPlayerConfig(event.getPlayer().getUniqueId().toString());
