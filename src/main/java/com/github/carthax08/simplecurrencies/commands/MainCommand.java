@@ -31,19 +31,27 @@ public class MainCommand implements CommandExecutor {
                 return true;
             } else {
                 if (args.length == 0) {
-                    player.sendMessage(ChatColor.RED + "Please provide an operation (add, set, remove, clear, reload), currency, player, and amount!");
+                    player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                     return true;
-                } else {
-                    for (Player player1 : Bukkit.getOnlinePlayers()) {
-                        if (player1.getName().equals(args[2])) {
-                            return handleCommand(player1, args, player);
+                } else if(args.length > 1){
+                    if(checkCommandType(args[0]) != CommandType.RELOAD) {
+                        for (Player player1 : Bukkit.getOnlinePlayers()) {
+                            if (player1.getName().equals(args[2])) {
+                                return handleCommand(player1, args, player, command);
+                            }
                         }
-                    }
-                    for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
-                        if (offlinePlayer.getName().equals(args[2]) && offlinePlayer.hasPlayedBefore()) {
-                            return handleCommand(offlinePlayer, args, player);
+                        for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
+                            if (offlinePlayer.getName().equals(args[2]) && offlinePlayer.hasPlayedBefore()) {
+                                return handleCommand(offlinePlayer, args, player, command);
+                            }
                         }
+                    }else{
+                        plugin.reloadConfig();
+                        PricesConfig.reloadConfig();
+                        player.sendMessage(ChatColor.GREEN + "Successfully reload the config");
                     }
+                }else{
+                    player.sendMessage(ChatColor.RED + "USAGE:: " + command.getUsage());
                 }
                 return false;
             }
@@ -76,16 +84,16 @@ public class MainCommand implements CommandExecutor {
         return args.length;
     }
 
-    public boolean handleCommand(OfflinePlayer playerToEdit, String[] args, Player player){
+    public boolean handleCommand(OfflinePlayer playerToEdit, String[] args, Player player, Command command){
         if(checkCommandType(args[0]) == CommandType.ADD){
             if(checkArgsLength(args) == 1){
-                player.sendMessage("Please provide a currency, player, and amount");
+                player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 return false;
             }else if(checkArgsLength(args) == 2){
-                player.sendMessage("Please provide a player and amount!");
+                player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 return false;
             }else if(checkArgsLength(args) == 3){
-                player.sendMessage("Please provide an amount!");
+                player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 return false;
             }else{
                 if(checkCurrency(args[1])){
@@ -93,20 +101,20 @@ public class MainCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.GREEN + "Successfully added " + args[3] + " " + args[1].toLowerCase() + " to player " + args[2]);
                     return true;
                 }else{
-                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
+                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or the config isn't being read properly. Please check the config or alert the owner!");
                     return false;
                 }
             }
         }
         if(checkCommandType(args[0]) == CommandType.SET){
             if(checkArgsLength(args) == 1){
-                player.sendMessage("Please provide a currency, player, and amount");
+                player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 return false;
             }else if(checkArgsLength(args) == 2){
-                player.sendMessage("Please provide a player and amount!");
+                player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 return false;
             }else if(checkArgsLength(args) == 3){
-                player.sendMessage("Please provide an amount!");
+                player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 return false;
             }else{
                 FileConfiguration config = plugin.getConfig();
@@ -137,17 +145,17 @@ public class MainCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.GREEN + "Successfully removed " + args[3] + " " + args[1].toLowerCase() + " from player " + args[2]);
                     return true;
                 }else{
-                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
+                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or the config isn't being read properly. Please check the config or alert the owner!");
                     return false;
                 }
             }
         }
         if(checkCommandType(args[0]) == CommandType.CLEAR){
             if(checkArgsLength(args) == 1){
-                player.sendMessage("Please provide a currency and a player");
+                player.sendMessage("Please provide a currency, player, and amount");
                 return false;
             }else if(checkArgsLength(args) == 2){
-                player.sendMessage("Please provide a player!");
+                player.sendMessage("Please provide a player and amount!");
                 return false;
             }else{
                 FileConfiguration config = plugin.getConfig();
@@ -157,15 +165,10 @@ public class MainCommand implements CommandExecutor {
                     plugin.saveConfig();
                     return true;
                 }else{
-                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or it isn't enabled. Please check the config!");
+                    player.sendMessage("Unable to perform request. Either the currency doesn't exist or the config isn't being read properly. Please check the config or alert the owner!");
                     return false;
                 }
             }
-        }
-        if(checkCommandType(args[0]) == CommandType.RELOAD){
-            plugin.reloadConfig();
-            PricesConfig.reloadConfig();
-            player.sendMessage(ChatColor.GREEN + "Successfully reload the config");
         }
         return false;
     }
