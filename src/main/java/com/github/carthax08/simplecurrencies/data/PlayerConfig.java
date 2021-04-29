@@ -1,24 +1,29 @@
 package com.github.carthax08.simplecurrencies.data;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
-import org.bukkit.configuration.file.FileConfiguration;
+import com.github.carthax08.simplecurrencies.api.Config;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 public class PlayerConfig {
     private static File file;
     private static HashMap<String, YamlConfiguration> playerConfigMap = new HashMap<>();
 
-    public static YamlConfiguration createPlayerConfig(String UUID){
+    public static YamlConfiguration loadPlayerConfig(String UUID){
         file = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
         if(!file.exists()){
             try {
                 file.createNewFile();
-                playerConfigMap.put(UUID, YamlConfiguration.loadConfiguration(file));
+                List<String> currencyList = Config.getCurrencyList();
+                YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+                for(String currency : currencyList){
+                    config.set(currency, 0);
+                }
+                playerConfigMap.put(UUID, config);
 
             } catch (IOException e) {
                 e.printStackTrace();

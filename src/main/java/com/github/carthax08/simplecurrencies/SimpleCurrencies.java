@@ -12,14 +12,17 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Random;
+import java.util.Scanner;
 
 public final class SimpleCurrencies extends JavaPlugin {
 
     private static SimpleCurrencies instance;
-    private static FileConfiguration sellConfig;
     private Random rand;
-    private static String version = "2.1.0";
+    private static String version = "3.0";
 
     @Override
     public void onEnable() {
@@ -43,13 +46,17 @@ public final class SimpleCurrencies extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onPlayerLeaveEvent(), this);
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "Event registration finished.");
 
+        //Check Version
+        if(!checkVersion()){
+            getLogger().warning("Simple currencies is outdated! Please update.");
+        }
+
         //Config Registration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
         //Shop Config Registration
         PricesConfig.setupConfig();
-        sellConfig = PricesConfig.getConfig();
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "Config registration finished.");
 
         //Placeholders setup
@@ -91,5 +98,22 @@ public final class SimpleCurrencies extends JavaPlugin {
     public static SimpleCurrencies getInstance(){
         return instance;
     }
+
+    private boolean checkVersion(){
+        try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + 86192).openStream();
+             Scanner scanner = new Scanner(inputStream)) {
+            if (scanner.hasNext()) {
+                String checkedVersion = scanner.next();
+                scanner.close();
+                return checkedVersion.equalsIgnoreCase(version);
+            }
+            instance.getLogger().info("Cannot look for updates. Is spigot down?");
+            return true;
+        } catch (IOException exception) {
+            instance.getLogger().info("Cannot look for updates: " + exception.getMessage());
+            return true;
+        }
+    }
+
 
 }
