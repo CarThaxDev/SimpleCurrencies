@@ -5,12 +5,11 @@
 # NOTE: ALL CURRENCY NAMES MUST BE LOWER CASE OR THE PLUGIN WILL NOT RECOGNIZE THEM
 # After you are done editing your config, please set hasBeenEdited to true to get rid of the message on server start.
 
-# If you want to edit the items that can be sold as well as their values, go to prices.yml. All items must be put in both items and prices.
-# The items tab is purely used to check if it is sellable, and the prices tab is for the prices.
+# If you want to edit the items that can be sold as well as their values, go to prices.yml
 # Please note that you have to get the item ids
 
 currencies:
-  - tickets
+  - tokens
   - money
 settings:
   hasBeenEdited: false
