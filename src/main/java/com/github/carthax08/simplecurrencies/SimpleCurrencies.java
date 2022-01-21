@@ -73,7 +73,7 @@ public final class SimpleCurrencies extends JavaPlugin {
             getServer().getConsoleSender().sendMessage("[SimpleCurrencies] " + ChatColor.YELLOW + "If you haven't already, please leave a rating on Spigot.");
         }
         //Final Init message
-        getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The pluign has finished initializing. Enjoy!");
+        getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The plugin has finished initializing. Enjoy!");
     }
 
 
@@ -86,7 +86,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getServer().getLogger().info("[SimpleCurrencies] Saving Config...");
         saveConfig();
         getServer().getLogger().info("[SimpleCurrencies] Config Saved...");
-        getServer().getLogger().info("[SimpleCurrentins} Saving Player Data...");
+        getServer().getLogger().info("[SimpleCurrencies] Saving Player Data...");
         for(Player player : Bukkit.getOnlinePlayers()){
             PlayerConfig.saveConfig(player.getUniqueId().toString());
         }
@@ -100,7 +100,7 @@ public final class SimpleCurrencies extends JavaPlugin {
     }
 
     private boolean checkVersion(){
-        try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + 86192).openStream();
+        try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=86192").openStream();
              Scanner scanner = new Scanner(inputStream)) {
             if (scanner.hasNext()) {
                 String checkedVersion = scanner.next();

@@ -1,6 +1,7 @@
 package com.github.carthax08.simplecurrencies.commands;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
+import com.github.carthax08.simplecurrencies.data.PlayerConfig;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import com.github.carthax08.simplecurrencies.enums.CommandType;
 import org.bukkit.Bukkit;
@@ -47,10 +48,13 @@ public class MainCommand implements CommandExecutor {
                     }else{
                         plugin.reloadConfig();
                         PricesConfig.reloadConfig();
+                        for (Player player1 : Bukkit.getOnlinePlayers()) {
+                            PlayerConfig.reloadConfig(player1.getUniqueId().toString());
+                        }
                         player.sendMessage(ChatColor.GREEN + "Successfully reload the config");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED + "USAGE:: " + command.getUsage());
+                    player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
                 }
                 return false;
             }
@@ -62,22 +66,20 @@ public class MainCommand implements CommandExecutor {
 
 
     public CommandType checkCommandType(String stringToCheck){
-        if(stringToCheck.equalsIgnoreCase("add")){
-            return CommandType.ADD;
+        switch(stringToCheck.toLowerCase()){
+            case "add":
+                return CommandType.ADD;
+            case "set":
+                return CommandType.SET;
+            case "remove":
+                return CommandType.REMOVE;
+            case "clear":
+                return CommandType.CLEAR;
+            case "reload":
+                return CommandType.RELOAD;
+            default:
+                return CommandType.UNKNOWN;
         }
-        if(stringToCheck.equalsIgnoreCase("set")){
-            return CommandType.SET;
-        }
-        if(stringToCheck.equalsIgnoreCase("remove")){
-            return CommandType.REMOVE;
-        }
-        if(stringToCheck.equalsIgnoreCase("clear")){
-            return CommandType.CLEAR;
-        }
-        if(stringToCheck.equalsIgnoreCase("reload")){
-            return CommandType.RELOAD;
-        }
-        return CommandType.UNKNOWN;
     }
     public int checkArgsLength(String[] args){
         return args.length;
