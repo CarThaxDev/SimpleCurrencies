@@ -24,10 +24,15 @@ public class Currencies {
         config.set(currencyToEdit, 0);
         PlayerConfig.replaceConfigInMap(config, playerToEdit.getUniqueId().toString());
     }
-    public static void removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToRemove){
+    public static boolean removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToRemove){
         YamlConfiguration config = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
-        config.set(currencyToEdit, config.getDouble(currencyToEdit) - amountToRemove);
-        PlayerConfig.replaceConfigInMap(config, playerToEdit.getUniqueId().toString());
+        if(config.getDouble(currencyToEdit) - amountToRemove >= 0) {
+            config.set(currencyToEdit, config.getDouble(currencyToEdit) - amountToRemove);
+            PlayerConfig.replaceConfigInMap(config, playerToEdit.getUniqueId().toString());
+            return true;
+        }else{
+            return false;
+        }
     }
     public static Double getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
         return PlayerConfig.getConfig(playerToGetFrom.getUniqueId().toString()).getDouble(currencyToGet);

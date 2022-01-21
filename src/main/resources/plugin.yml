@@ -9,7 +9,7 @@ website: github.com/CarThax08/SimpleCurrencies
 
 commands:
   simplecurrencies:
-    usage: /simplecurrencies [add, set, remove, clear, reload] [player] [currency] [amount to add, set to, or remove]
+    usage: /simplecurrencies [add, set, remove, clear, reload] [currency] [player] [amount to add, set to, or remove]
     description: The main command for simplecurrencies
     aliases: [sc, currencies]
   getcurrency:
