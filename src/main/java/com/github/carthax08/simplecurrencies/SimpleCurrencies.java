@@ -22,7 +22,7 @@ public final class SimpleCurrencies extends JavaPlugin {
 
     private static SimpleCurrencies instance;
     private Random rand;
-    private static String version = "3.0";
+    private static String version = "3.1.0";
 
     @Override
     public void onEnable() {
@@ -83,9 +83,6 @@ public final class SimpleCurrencies extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         getServer().getLogger().info("[SimpleCurrencies] The plugin is shutting down, please wait...");
-        getServer().getLogger().info("[SimpleCurrencies] Saving Config...");
-        saveConfig();
-        getServer().getLogger().info("[SimpleCurrencies] Config Saved...");
         getServer().getLogger().info("[SimpleCurrencies] Saving Player Data...");
         for(Player player : Bukkit.getOnlinePlayers()){
             PlayerConfig.saveConfig(player.getUniqueId().toString());
