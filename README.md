@@ -1,13 +1,15 @@
-# Getting Started 
+# Simple Currencies
+
+## Getting Started 
 To get started using SimpleCurrencies, simply put the plugin jar file into your plugins folder. There are no other required plugins, but there are placeholders through PlaceholderAPI.  
   
 Once you have done that, start the server. The plugin will generate all the config files for you and put the default values in. If you want to edit the currencies, load config.yml. If you want to edit sell prices or sellable items open prices.yml.  
   
 Once you are done editing the config (if you have) do /sc reload
 
-# Default Configs
+## Default Configs
 
-## config.yml
+### config.yml
 ```yaml # SimpleCurrencies
 # Made by CarThax08
 # https://www.github.com/carthax08/SimpleCurrencies
@@ -20,7 +22,7 @@ currencies:
   - tokens
   - money
 ```
-## prices.yml
+### prices.yml
 ```yaml
 prices:
   coal:
@@ -39,12 +41,12 @@ prices:
     price: 20.0
     currency: money
 ```
-# Permissions
+## Permissions
 
 * simplecurrencies.admin - /simplecurrencies
 * simplecurrencies.getotherbalances - /getcurrency
 
-# Commands
+## Commands
 
 * /simplecurrencies [set, add, remove, clear, reload] [currency] [player] [amount]
 * /getcurrency [currency] [player]
