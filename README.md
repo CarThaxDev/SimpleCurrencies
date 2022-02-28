@@ -1,4 +1,6 @@
 # Simple Currencies
+  
+  Main repo for SimpleCurrenices
 
 ## Getting Started 
 To get started using SimpleCurrencies, simply put the plugin jar file into your plugins folder. There are no other required plugins, but there are placeholders through PlaceholderAPI.  
