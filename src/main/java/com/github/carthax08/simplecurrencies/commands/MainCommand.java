@@ -17,68 +17,59 @@ import static com.github.carthax08.simplecurrencies.api.Currencies.*;
 
 public class MainCommand implements CommandExecutor {
 
-    SimpleCurrencies plugin;
-
-    public MainCommand(SimpleCurrencies main){
-        plugin = main;
-    }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            if (!player.hasPermission("simplecurrencies.admin")) {
-                player.sendMessage("You do not have the required permissions to use this command!");
-                return true;
-            } else {
-                if (args.length == 0) {
-                    player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
-                    return true;
-                } else if(args.length > 1){
-                    if(checkCommandType(args[0]) != CommandType.RELOAD) {
-                        for (Player player1 : Bukkit.getOnlinePlayers()) {
-                            if (player1.getName().equals(args[2])) {
-                                return handleCommand(player1, args, player, command);
-                            }
-                        }
-                        for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
-                            if (offlinePlayer.getName().equals(args[2]) && offlinePlayer.hasPlayedBefore()) {
-                                return handleCommand(offlinePlayer, args, player, command);
-                            }
-                        }
-                    }else{
-                        plugin.reloadConfig();
-                        PricesConfig.reloadConfig();
-                        for (Player player1 : Bukkit.getOnlinePlayers()) {
-                            PlayerConfig.reloadConfig(player1.getUniqueId().toString());
-                        }
-                        player.sendMessage(ChatColor.GREEN + "Successfully reload the config");
-                    }
-                }else{
-                    player.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
-                }
-                return false;
-            }
-        } else {
+
+        // Check if command sender is console
+        if(!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "You must be a player to run this command!");
+            return false;
+        }
+
+        Player plr = (Player) sender;
+
+        // Check if player has permission
+        if(!plr.hasPermission("simplecurrencies.admin")) {
+            plr.sendMessage("You do not have the required permissions to use this command!");
+            return false;
+        }
+
+        // Check for no arguments
+        if(args.length == 0) {
+            plr.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
             return true;
         }
+
+        if(checkCommandType(args[0]) == CommandType.RELOAD) {
+            SimpleCurrencies.getInstance().reloadConfig();
+            PricesConfig.reloadConfig();
+            for (Player player1 : Bukkit.getOnlinePlayers()) {
+                PlayerConfig.reloadConfig(player1.getUniqueId().toString());
+            }
+            plr.sendMessage(ChatColor.GREEN + "Successfully reload the config");
+        }
+
+        /*for (Player player1 : Bukkit.getOnlinePlayers()) {
+            if (player1.getName().equals(args[2])) {
+                return handleCommand(player1, args, plr, command);
+            }
+        }
+        for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
+            if (offlinePlayer.getName().equals(args[2]) && offlinePlayer.hasPlayedBefore()) {
+                return handleCommand(offlinePlayer, args, plr, command);
+            }
+        }*/
+
+        //plr.sendMessage(ChatColor.RED + "USAGE: " + command.getUsage());
+        return true;
     }
 
 
     public CommandType checkCommandType(String stringToCheck){
-        switch(stringToCheck.toLowerCase()){
-            case "add":
-                return CommandType.ADD;
-            case "set":
-                return CommandType.SET;
-            case "remove":
-                return CommandType.REMOVE;
-            case "clear":
-                return CommandType.CLEAR;
-            case "reload":
-                return CommandType.RELOAD;
-            default:
-                return CommandType.UNKNOWN;
+        try {
+            return CommandType.valueOf(stringToCheck.toUpperCase());
+        } catch(IllegalArgumentException ex) {
+            return CommandType.UNKNOWN;
         }
     }
     public int checkArgsLength(String[] args){
@@ -160,7 +151,7 @@ public class MainCommand implements CommandExecutor {
                 if(checkCurrency(args[1])){
                     clearCurrency(args[1], playerToEdit);
                     player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[2] + "'s " + args[1]);
-                    plugin.saveConfig();
+                    SimpleCurrencies.getInstance().saveConfig();
                     return true;
                 }else{
                     player.sendMessage("Unable to perform request. Either the currency doesn't exist or the config isn't being read properly. Please check the config or alert the owner!");

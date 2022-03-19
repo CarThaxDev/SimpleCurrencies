@@ -4,11 +4,10 @@ import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpan
 import com.github.carthax08.simplecurrencies.commands.*;
 import com.github.carthax08.simplecurrencies.data.PlayerConfig;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
-import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
-import com.github.carthax08.simplecurrencies.events.onPlayerLeaveEvent;
+import com.github.carthax08.simplecurrencies.listeners.PlayerJoinListener;
+import com.github.carthax08.simplecurrencies.listeners.PlayerLeaveListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,16 +33,16 @@ public final class SimpleCurrencies extends JavaPlugin {
         rand = new Random();
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The plugin is initializing... Please wait.");
         //Command Registration
-        getCommand("simplecurrencies").setExecutor(new MainCommand(this));
-        getCommand("getcurrency").setExecutor(new GetCommand(this));
+        getCommand("simplecurrencies").setExecutor(new MainCommand());
+        getCommand("getcurrency").setExecutor(new GetCommand());
         getCommand("sendcurrency").setExecutor(new PayCommand());
         getCommand("balance").setExecutor(new BalanceCommand());
         getCommand("sell").setExecutor(new SellCommand());
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "Command registration finished.");
 
         //Event Registration
-        getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
-        getServer().getPluginManager().registerEvents(new onPlayerLeaveEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerLeaveListener(), this);
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "Event registration finished.");
 
         //Check Version

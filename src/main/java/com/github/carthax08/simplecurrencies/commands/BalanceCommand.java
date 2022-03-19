@@ -13,13 +13,13 @@ import static com.github.carthax08.simplecurrencies.api.Currencies.getCurrency;
 public class BalanceCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(sender instanceof Player){
+        if(sender instanceof Player) {
             Player player = (Player) sender;
             if(args.length == 0){
                 player.sendMessage("Please provide a currency!");
                 return true;
             }else{
-                if(checkCurrency(args[0].toLowerCase())){
+                if(checkCurrency(args[0].toLowerCase())) {
                     player.sendMessage(ChatColor.GREEN + args[0].toLowerCase() + ": " + ChatColor.RESET + getCurrency(args[0].toLowerCase(), player));
                     return true;
                 }else{

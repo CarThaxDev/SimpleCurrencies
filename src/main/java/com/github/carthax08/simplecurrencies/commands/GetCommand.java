@@ -10,11 +10,6 @@ import org.bukkit.entity.Player;
 
 public class GetCommand implements CommandExecutor {
 
-    SimpleCurrencies plugin;
-    public GetCommand(SimpleCurrencies main){
-        plugin = main;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
