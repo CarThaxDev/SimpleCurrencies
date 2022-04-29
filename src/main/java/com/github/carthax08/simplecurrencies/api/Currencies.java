@@ -1,6 +1,7 @@
 package com.github.carthax08.simplecurrencies.api;
 
 import com.github.carthax08.simplecurrencies.data.PlayerConfig;
+import com.github.carthax08.simplecurrencies.data.PluginPlayer;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,32 +11,25 @@ public class Currencies {
     private static final FileConfiguration sellConfig = PricesConfig.getConfig();
 
     public static void addCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToAdd){
-        YamlConfiguration config = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
-        config.set(currencyToEdit, config.getDouble(currencyToEdit) + amountToAdd);
-        PlayerConfig.replaceConfigInMap(config, playerToEdit.getUniqueId().toString());
+        PluginPlayer player = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
+        player.addCurrency(currencyToEdit, amountToAdd);
+
     }
     public static void setCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToSet){
-        YamlConfiguration config = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
-        config.set(currencyToEdit, amountToSet);
-        PlayerConfig.replaceConfigInMap(config, playerToEdit.getUniqueId().toString());
+        PluginPlayer player = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
+        player.setCurrency(currencyToEdit, amountToSet);
     }
     public static void clearCurrency(String currencyToEdit, OfflinePlayer playerToEdit){
-        YamlConfiguration config = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
-        config.set(currencyToEdit, 0);
-        PlayerConfig.replaceConfigInMap(config, playerToEdit.getUniqueId().toString());
+        PluginPlayer player = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
+        player.clearCurrency(currencyToEdit);
+
     }
     public static boolean removeCurrency(String currencyToEdit, OfflinePlayer playerToEdit, Double amountToRemove){
-        YamlConfiguration config = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
-        if(config.getDouble(currencyToEdit) - amountToRemove >= 0) {
-            config.set(currencyToEdit, config.getDouble(currencyToEdit) - amountToRemove);
-            PlayerConfig.replaceConfigInMap(config, playerToEdit.getUniqueId().toString());
-            return true;
-        }else{
-            return false;
-        }
+        PluginPlayer player = PlayerConfig.getConfig(playerToEdit.getUniqueId().toString());
+        return player.removeCurrency(currencyToEdit, amountToRemove);
     }
     public static Double getCurrency(String currencyToGet, OfflinePlayer playerToGetFrom){
-        return PlayerConfig.getConfig(playerToGetFrom.getUniqueId().toString()).getDouble(currencyToGet);
+        return PlayerConfig.getConfig(playerToGetFrom.getUniqueId().toString()).getCurrency(currencyToGet);
     }
     public static Double getSellingPrice(String nameToCheck){
         return sellConfig.getDouble("prices." + nameToCheck + ".price");

@@ -15,7 +15,7 @@ public class Config {
         instance.saveConfig();
     }
     public static Boolean checkCurrency(String currencyToCheck){
-        return instance.getConfig().getStringList("currencies").contains(currencyToCheck);
+        return instance.getConfig().getStringList("currencies").contains(currencyToCheck.toLowerCase());
     }
     public static List<String> getCurrencyList(){
         return instance.getConfig().getStringList("currencies");

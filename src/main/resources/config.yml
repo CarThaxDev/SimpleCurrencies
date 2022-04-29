@@ -1,15 +1,20 @@
-# SimpleCurrencies
-# Made by CarThax08
-# https://www.github.com/carthax08/SimpleCurrencies
-# the currencies tab can be edited to your liking, but a few default values are set.
-# NOTE: ALL CURRENCY NAMES MUST BE LOWER CASE OR THE PLUGIN WILL NOT RECOGNIZE THEM
-# After you are done editing your config, please set hasBeenEdited to true to get rid of the message on server start.
+  # SimpleCurrencies
+  # Made by CarThax08
+  # https://www.github.com/carthax08/SimpleCurrencies
+  # the currencies tab can be edited to your liking, but a few default values are set.
+  # Keep all currencies lower case to prevent issues.
 
-# If you want to edit the items that can be sold as well as their values, go to prices.yml
-# Please note that you have to get the item ids
+  # If you want to edit the items that can be sold as well as their values, go to prices.yml
 
-currencies:
-  - tokens
-  - money
-settings:
-  hasBeenEdited: false
+  currencies:
+    - tokens
+    - money
+  database:
+      #Storage Type (yaml for config files, mysql for mysql, and mariadb for MariaDB)
+      type: yaml
+      #If not using Yaml, these are used to connect to the database
+      address: 127.0.0.1
+      port: 3306
+      username: username
+      password: password
+      name: storage

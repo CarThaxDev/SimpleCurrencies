@@ -4,8 +4,10 @@ import com.github.carthax08.simplecurrencies.PapiExpansion.SimpleCurrenciesExpan
 import com.github.carthax08.simplecurrencies.commands.*;
 import com.github.carthax08.simplecurrencies.data.PlayerConfig;
 import com.github.carthax08.simplecurrencies.data.PricesConfig;
+import com.github.carthax08.simplecurrencies.data.db.mysql.DatabaseHandler;
 import com.github.carthax08.simplecurrencies.events.onPlayerJoinEvent;
 import com.github.carthax08.simplecurrencies.events.onPlayerLeaveEvent;
+import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,6 +17,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,6 +28,8 @@ public final class SimpleCurrencies extends JavaPlugin {
     private static SimpleCurrencies instance;
     private Random rand;
     private static String version = "3.1.0";
+
+    private static HikariDataSource databaseConnection;
 
     @Override
     public void onEnable() {
@@ -42,7 +49,7 @@ public final class SimpleCurrencies extends JavaPlugin {
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "Command registration finished.");
 
         //Event Registration
-        getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new onPlayerJoinEvent(), this);
         getServer().getPluginManager().registerEvents(new onPlayerLeaveEvent(), this);
         getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "Event registration finished.");
 
@@ -67,13 +74,16 @@ public final class SimpleCurrencies extends JavaPlugin {
             getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "PlaceholderAPI not detected, skipping hook.");
         }
 
-        //Rating Message
-        int i = rand.nextInt(1000);
-        if(i > 10 && i < 15){
-            getServer().getConsoleSender().sendMessage("[SimpleCurrencies] " + ChatColor.YELLOW + "If you haven't already, please leave a rating on Spigot.");
+        //Data Storage Initialization
+        if(Objects.equals(getConfig().getString("database.type"), "mysql")){
+            databaseConnection = DatabaseHandler.connect("mysql://" + getConfig().getString("database.address") + ":" + getConfig().getString("database.port") + "/" + getConfig().getString("database.name"), getConfig().getString("username"), getConfig().getString("database.password"));
         }
+        if(Objects.equals(getConfig().getString("database.type"), "mariadb")){
+            databaseConnection = DatabaseHandler.connect("mariadb://" + getConfig().getString("database.address") + ":" + getConfig().getString("database.port") + "/" + getConfig().getString("database.name"), getConfig().getString("username"), getConfig().getString("database.password"));
+        }
+
         //Final Init message
-        getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The plugin has finished initializing. Enjoy!");
+        getServer().getConsoleSender().sendMessage("[SimpleCurrencies]" + ChatColor.GREEN + "The plugin has finished initializing.");
     }
 
 
@@ -111,6 +121,15 @@ public final class SimpleCurrencies extends JavaPlugin {
             return true;
         }
     }
-
-
+    public static HikariDataSource getHikariDatabaseConnection(){
+        return databaseConnection;
+    }
+    public Connection getDatabaseConnection(){
+        try {
+            return databaseConnection.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

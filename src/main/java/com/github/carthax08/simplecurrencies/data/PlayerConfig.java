@@ -2,47 +2,52 @@ package com.github.carthax08.simplecurrencies.data;
 
 import com.github.carthax08.simplecurrencies.SimpleCurrencies;
 import com.github.carthax08.simplecurrencies.api.Config;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class PlayerConfig {
     private static File file;
-    private static HashMap<String, YamlConfiguration> playerConfigMap = new HashMap<>();
+    private static HashMap<String, PluginPlayer> playerConfigMap = new HashMap<>();
 
     public static YamlConfiguration loadPlayerConfig(String UUID){
-        file = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
+        System.out.println(SimpleCurrencies.getInstance().getDataFolder());
+        file = new File(SimpleCurrencies.getInstance().getDataFolder() + File.separator + "player-data", UUID + ".yml");
         if(!file.exists()){
             try {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
                 List<String> currencyList = Config.getCurrencyList();
                 YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
                 for(String currency : currencyList){
                     config.set(currency, 0);
                 }
-                playerConfigMap.put(UUID, config);
+                playerConfigMap.put(UUID, new PluginPlayer(YamlConfiguration.loadConfiguration(file)));
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else{
-            playerConfigMap.put(UUID, YamlConfiguration.loadConfiguration(file));
+            playerConfigMap.put(UUID, new PluginPlayer(YamlConfiguration.loadConfiguration(file)));
         }
         return YamlConfiguration.loadConfiguration(file);
     }
 
-    public static YamlConfiguration getConfig(String UUID){
+    public static PluginPlayer getConfig(String UUID){
         return playerConfigMap.get(UUID);
     }
 
     public static void saveConfig(String UUID){
         try {
-            YamlConfiguration config = playerConfigMap.get(UUID);
-            File f = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
-            config.save(f);
+            PluginPlayer config = playerConfigMap.get(UUID);
+            File f = new File(SimpleCurrencies.getInstance().getDataFolder() + File.separator + "player-data", UUID + ".yml");
+            config.config.save(f);
             removeConfigFromMap(UUID);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,15 +56,9 @@ public class PlayerConfig {
     public static void removeConfigFromMap(String UUID){
         playerConfigMap.remove(UUID);
     }
-    public static void reloadConfig(String UUID){
+    public static void reloadConfig(String UUID) {
         File file1 = new File(SimpleCurrencies.getInstance().getDataFolder(), UUID + ".yml");
-        playerConfigMap.replace(UUID, YamlConfiguration.loadConfiguration(file1));
-    }
-
-    public static void replaceConfigInMap(YamlConfiguration config, String UUID){
-        if(playerConfigMap.containsKey(UUID)){
-            playerConfigMap.replace(UUID, config);
-        }
+        playerConfigMap.replace(UUID, new PluginPlayer(YamlConfiguration.loadConfiguration(file)));
     }
 
 

@@ -1,0 +1,16 @@
+prices:
+  coal:
+    price: 0.5
+    currency: money
+  iron_ore:
+    price: 3.0
+    currency: money
+  gold_ore:
+    price: 5.0
+    currency: money
+  diamond:
+    price: 10.0
+    currency: money
+  emerald:
+    price: 20.0
+    currency: money
