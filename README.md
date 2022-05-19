@@ -5,7 +5,7 @@
 ## Getting Started 
 To get started using SimpleCurrencies, simply put the plugin jar file into your plugins folder. There are no other required plugins, but there are placeholders through PlaceholderAPI.  
   
-Once you have done that, start the server. The plugin will generate all the config files for you and put the default values in. If you want to edit the currencies, load config.yml. If you want to edit sell prices or sellable items open prices.yml.  
+Once you have done that, start the server. The plugin will generate all the config files for you and put the default values in. If you want to edit the currencies, open config.yml. If you want to edit sell prices or sellable items open prices.yml.  
   
 Once you are done editing the config (if you have) do /sc reload
 
